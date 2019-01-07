@@ -1,0 +1,69 @@
+<!--
+  Generated template for the EditProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="hee">
+    <ion-title>Edit Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <form>
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Your Full Name</ion-label>
+          <!-- <ion-icon name="person" item-right></ion-icon> -->
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Your E-Mail ID </ion-label>
+          <!-- <ion-icon name="person" item-right></ion-icon> -->
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Your Mobile Number</ion-label>
+          <!-- <ion-icon name="person" item-right></ion-icon> -->
+          <ion-input type="text"></ion-input>
+        </ion-item>
+
+        <!-- <div class="error">
+              <p *ngIf="signInForm.controls.user_name.hasError('email') && signInForm.controls.user_name.touched">Enter valid email!</p>
+            </div> -->
+
+        <ion-item>
+          <ion-label floating>Your Date Of Birth</ion-label>
+          <!-- <ion-icon name="person" item-right></ion-icon> -->
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-label>Gender</ion-label>
+        <ion-list radio-group>
+          <ion-item>
+            <ion-label>Male</ion-label>
+            <ion-radio value="Male" checked></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Female</ion-label>
+            <ion-radio value="Female"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <!-- <div class="error">
+              <p *ngIf="signInForm.controls.password.hasError('required') && signInForm.controls.password.touched">Password is required!</p>
+              <p *ngIf="signInForm.controls.password.hasError('minlength') && signInForm.controls.password.touched">Minimum password length is 8!</p>
+            </div> -->
+
+        <!-- <button ion-button  color="orange" round>Update Profile</button> -->
+        <br>
+      </ion-list>
+    </form>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <button ion-button color="orange" full>Update Profile</button>
+</ion-footer>

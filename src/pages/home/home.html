@@ -1,0 +1,122 @@
+<ion-header style="color:blue">
+  <ion-navbar>
+    <ion-row>
+      <ion-col (click)="loc()">
+        <ion-icon ios="ios-locate" md="md-locate" style="color: white"></ion-icon>
+        <b style="color: white">Choose Your Location</b>
+      </ion-col>
+    </ion-row>
+    <ion-searchbar>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+<ion-content  scroll=false>
+  <ion-slides pager autoplay="3000" loop=true class="slide">
+
+    <ion-slide>
+      <img src="../../assets/imgs/2.jpg" style="height: 50vw;width: 100vw;">
+    </ion-slide>
+
+    <ion-slide>
+      <img src="../../assets/imgs/3.jpg" style="height: 50vw;width: 100vw;">
+    </ion-slide>
+
+    <ion-slide>
+      <img src="../../assets/imgs/bike3.jpg" style="height: 50vw;width: 100vw;">
+    </ion-slide>
+
+  </ion-slides>
+  <ion-grid padding>
+      <ion-row>
+        <ion-col col-6  (click)="bike()"><i class="fa fa-motorcycle" aria-hidden="true" style="color: blue;font-size: 1.5em;"></i><br/>Bike Services</ion-col>
+        <ion-col col-6><i class="fa fa-motorcycle" aria-hidden="true" style="color: blue;font-size: 1.5em;"></i><br>Bike Washing Services</ion-col>
+      </ion-row>
+    </ion-grid>
+  <!-- <ion-scroll scrollX="true" direction="x" class="banners" style="margin-top: -5em;">
+    <img *ngFor="let banner of banners" [src]="server_api+banner?.banner" onError="this.src='assets/imgs/noimage.png'"
+      (click)="move(banner?.btype,banner?.btype_id)">
+  </ion-scroll>
+  <ion-label>
+    <span style="float: left;">
+      <b>SPECIAL SERVICES </b>
+    </span>
+    <a style="float: right;">View All</a>
+  </ion-label> -->
+
+  <ion-grid>
+      <ion-row>
+      <ion-col col-6><div>
+            <img src="../../assets/imgs/bike1.jpg" style="max-height: 130px;" />
+          </div>
+          <p>Bike service</p><p class="price">₹1,000.00</p>
+
+        </ion-col>
+     
+        <ion-col col-6><div>
+            <img src="../../assets/imgs/bike1.jpg" style="max-height: 130px;" />
+          </div>
+          <p>Bike service</p>
+          <p class="price">₹1,000.00</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col col-6><div>
+              <img src="../../assets/imgs/bike3.jpg" style="max-height: 130px;" />
+            </div>
+            <p>Bike service</p></ion-col>
+          <ion-col col-6><div>
+              <img src="../../assets/imgs/bike3.jpg" style="max-height: 130px;" />
+            </div>
+            <p>Bike service</p></ion-col>
+        </ion-row>
+    </ion-grid>
+  <!-- <ion-scroll scrollX="true" direction="x" class="special-items">
+    <ion-card>
+      <ion-col>
+        <div>
+          <img src="../../assets/imgs/bike1.jpg" style="max-height: 130px;" />
+        </div>
+        <p>Bike service</p>
+        <p class="price">₹1,000.00</p>
+      </ion-col>
+    </ion-card>
+    <ion-card>
+      <ion-col>
+        <div>
+          <img src="../../assets/imgs/bike2.jpeg" style=" max-height: 130px;" />
+        </div>
+        <p>Bike wash</p>
+        <p class="price">₹500.00</p>
+      </ion-col>
+    </ion-card>
+    <ion-card>
+      <ion-col col-3>
+        <div>
+          <img src="../../assets/imgs/bike3.jpg" style="    max-height: 130px;" />
+        </div>
+        <p>New bike service</p>
+        <p class="price">₹800.00</p>
+      </ion-col>
+    </ion-card>
+  </ion-scroll> -->
+
+</ion-content>
+<!-- <ion-footer>
+  <ion-toolbar color="primary">
+    <ion-segment color="light">
+      <ion-segment-button (click)="signin()">
+        <ion-icon name="home"></ion-icon>
+          
+      </ion-segment-button>
+      <ion-segment-button value="tabButtonTwo" (click)="signin()">
+        My Profile
+      </ion-segment-button>
+      <ion-segment-button value="tabButtonThree">
+        My orders
+      </ion-segment-button>
+      <ion-segment-button value="Alerts">
+        Alerts
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer> -->

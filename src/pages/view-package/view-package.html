@@ -1,0 +1,53 @@
+<!--
+  Generated template for the ViewPackagePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="hee">
+    <ion-title>Bike Service</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-item style="margin-top: -5px;" no-lines>
+   <ion-icon ios="ios-locate" md="md-locate" style="color: black"></ion-icon>
+    <b style="color: black">Hyderabad</b>
+    <ion-badge item-end style="background-color: #01040a;">Change</ion-badge>
+    </ion-item>
+  <p text-center padding><b>Help us understand your requirement</b></p>
+  <ion-card radio-group padding>
+    <p text-center><b>what is the capacity of your bike?</b></p>
+    
+    <ion-item>
+      <ion-radio value="Upto 180CC" disable="true"></ion-radio>
+      <ion-label>Upto 180CC</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-radio value="More than 180CC"></ion-radio>
+      <ion-label>More than 180CC</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-radio value="Royal Enfield"></ion-radio>
+      <ion-label>Royal Enfield</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <p text-center>On which day do you want the service?</p>
+  <ion-item no-lines padding>
+      <ion-badge item-start class="rr">Today</ion-badge>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <ion-badge style="margin-right: 10px;">Tomorrow</ion-badge>
+      <ion-badge item-end>Feature</ion-badge>
+    </ion-item>
+    <p text-center>your preferred time?</p>
+    <ion-item no-lines>
+        <ion-badge item-start>9AM-11AM</ion-badge>&nbsp;&nbsp;&nbsp;
+        <ion-badge item-center>3PM-5PM</ion-badge>
+        <ion-badge item-end>5PM-7PM</ion-badge>
+      </ion-item>
+      <button ion-button color="kesava" full (click)="viewP()">Choose A Package</button>
+</ion-content>
