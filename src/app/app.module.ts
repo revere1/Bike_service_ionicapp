@@ -29,14 +29,28 @@ import { LoginPage } from '../pages/login/login';
 import { MyprofilePage } from '../pages/myprofile/myprofile';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ManageAddressPage } from '../pages/manage-address/manage-address';
+import { ReviewAddressPage } from '../pages/review-address/review-address';
+import { AddAddressPage } from '../pages/add-address/add-address';
+import { EditAddressPage } from '../pages/edit-address/edit-address';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage, 
-    SigninPage, 
-    TabsPage, 
-    LocationPage, BikeServicePage, ViewPackagePage, SelectPackagePage,BookNowPage, LoginPage,MyprofilePage,EditProfilePage,ManageAddressPage
+    ListPage,
+    SigninPage,
+    TabsPage,
+    LocationPage,
+    BikeServicePage,
+    ViewPackagePage,
+    SelectPackagePage,
+    BookNowPage,
+    LoginPage,
+    MyprofilePage,
+    EditProfilePage,
+    ManageAddressPage,
+    AddAddressPage,
+    EditAddressPage,
+    ReviewAddressPage
   ],
   imports: [
     BrowserModule,
@@ -49,26 +63,31 @@ import { ManageAddressPage } from '../pages/manage-address/manage-address';
     MyApp,
     HomePage,
     ListPage,
-     SigninPage, 
-     TabsPage, 
-     LocationPage,
-    BikeServicePage, 
-    ViewPackagePage, 
+    SigninPage,
+    TabsPage,
+    LocationPage,
+    BikeServicePage,
+    ViewPackagePage,
     SelectPackagePage,
-    BookNowPage, 
+    BookNowPage,
     LoginPage,
     EditProfilePage,
     ManageAddressPage,
-     MyprofilePage
+    MyprofilePage,
+    ReviewAddressPage,
+    AddAddressPage,
+    EditAddressPage
+    
   ],
   providers: [
     StatusBar,
     SplashScreen,
     ReactiveFormsModule,
     FormsModule,
-    Geolocation,Network,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Connectivity,SpinnerProvider, GoogleMaps, GeocodingService
+    Geolocation, 
+    Network,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    Connectivity, SpinnerProvider, GoogleMaps, GeocodingService
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -7,6 +7,11 @@
 <ion-header>
 
   <ion-navbar color="hee">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="viewAA()">
+        <ion-icon name="add-circle" class="add-icon"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Manage Address</ion-title>
   </ion-navbar>
 
@@ -14,12 +19,14 @@
 
 
 <ion-content>
-    <ion-card>
-        <ion-card-content>
-          Ramesh   <ion-icon name="checkmark-circle"></ion-icon>
-          <p>vaninagar colony, hyderabad-500059</p>          
-          <button ion-button small color="light" round>Edit</button>
-          <button ion-button small round>Delete</button>
-        </ion-card-content>
-      </ion-card>
+  <ion-card>
+    <ion-card-content *ngFor="let address of addresses">
+      <ion-buttons end>
+        <ion-icon name="checkmark-circle" style="color:green"></ion-icon></ion-buttons>
+        {{address.full_name}} 
+        <p>{{address.full_address}}-{{address.zip}}</p>
+        <button ion-button small color="light" round (click)="viewEA()">Edit</button>
+        <button ion-button small round>Delete</button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

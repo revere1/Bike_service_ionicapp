@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { ReviewAddressPage } from '../review-address/review-address';
 
 /**
  * Generated class for the BookNowPage page.
@@ -15,11 +16,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BookNowPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private modalController:ModalController,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BookNowPage');
   }
+ 
+  // viewSP(){    
+  //   this.navCtrl.push(ReviewAddressPage)
+  // }
+  openFilterModal(){
+    let openFilterModal = this.modalController.create(ReviewAddressPage);
+    openFilterModal.present();
 
+  }
 }
