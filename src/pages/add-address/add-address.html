@@ -29,7 +29,7 @@
       <ion-item>
         <ion-label floating>City</ion-label>
         <!-- <ion-icon name="person" item-right></ion-icon> -->
-        <ion-input type="text" [(ngModel)]="full_address"></ion-input>
+        <ion-input type="text" [(ngModel)]="city"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Pin Code</ion-label>
@@ -55,7 +55,7 @@
         <p>
           <ion-icon name="checkmark-circle" style="color:green"></ion-icon> Want to make this address default
         </p>
-        <button ion-button color="orange" full (click)="update(item)">Add My Address</button>
+        <button ion-button color="orange" full (click)="update(name, full_address,city,zip,addresstype)">Add My Address</button>
       </ion-list>
       <br>
     </ion-list>

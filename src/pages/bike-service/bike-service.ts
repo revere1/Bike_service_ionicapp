@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { ViewPackagePage } from '../view-package/view-package';
 /**
  * Generated class for the BikeServicePage page.
@@ -21,7 +22,8 @@ export class BikeServicePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad BikeServicePage');
   }
-  viewP(){
+  viewPP(){
+    console.log("This is ")
     this.navCtrl.push(ViewPackagePage)
   }
 

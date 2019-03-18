@@ -15,14 +15,13 @@
 
 <ion-content>
   <ion-item style="margin-top: -5px;" no-lines>
-   <ion-icon ios="ios-locate" md="md-locate" style="color: black"></ion-icon>
+    <ion-icon ios="ios-locate" md="md-locate" style="color: black"></ion-icon>
     <b style="color: black">Hyderabad</b>
     <ion-badge item-end style="background-color: #01040a;">Change</ion-badge>
-    </ion-item>
+  </ion-item>
   <p text-center padding><b>Help us understand your requirement</b></p>
-  <ion-card radio-group padding>
+  <ion-card radio-group padding [(ngModel)]="capacity" ngDefaultControl>
     <p text-center><b>what is the capacity of your bike?</b></p>
-    
     <ion-item>
       <ion-radio value="Upto 180CC" disable="true"></ion-radio>
       <ion-label>Upto 180CC</ion-label>
@@ -38,16 +37,58 @@
   </ion-card>
 
   <p text-center>On which day do you want the service?</p>
-  <ion-item no-lines padding>
-      <ion-badge item-start class="rr">Today</ion-badge>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <ion-badge style="margin-right: 10px;">Tomorrow</ion-badge>
-      <ion-badge item-end>Feature</ion-badge>
-    </ion-item>
-    <p text-center>your preferred time?</p>
-    <ion-item no-lines>
-        <ion-badge item-start>9AM-11AM</ion-badge>&nbsp;&nbsp;&nbsp;
-        <ion-badge item-center>3PM-5PM</ion-badge>
-        <ion-badge item-end>5PM-7PM</ion-badge>
+  <!-- <ion-item no-lines padding  [(ngModel)]="serviceday"> -->
+  <!-- <button ion-button round value="Today" [(ngModel)]="Today">Today</button> -->
+  <ion-row radio-group [(ngModel)]="serviceday" ngDefaultControl>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label>Today</ion-label>
+        <ion-radio value="Today" disable="true"></ion-radio>
       </ion-item>
-      <button ion-button color="kesava" full (click)="viewP()">Choose A Package</button>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label>Tomorrow</ion-label>
+        <ion-radio value="Tomorrow" disable="true"></ion-radio>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label>Future</ion-label>
+        <!-- <ion-radio value="Feature" disable="true"></ion-radio> -->
+        <ion-datetime display-format="MMM DD YYYY "></ion-datetime>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <!-- <button item-start class="rr">Today</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <ion-badge style="margin-right: 10px;" [(ngModel)]="serviceday">Tomorrow</ion-badge>
+      <ion-badge item-end [(ngModel)]="serviceday">Feature</ion-badge> -->
+  <!-- </ion-item> -->
+  <p text-center>your preferred time?</p>
+  <ion-row radio-group [(ngModel)]="servicetime" ngDefaultControl>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label>9AM-11AM</ion-label>
+        <ion-radio value="9AM-11AM" disable="true"></ion-radio>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label>3PM-5PM</ion-label>
+        <ion-radio value="3PM-5PM" disable="true"></ion-radio>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label>5PM-7PM</ion-label>
+        <ion-radio value="5PM-7PM" disable="true"></ion-radio>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+    <!-- <ion-badge item-start  value="9AM-11AM">9AM-11AM</ion-badge> -->
+
+    <!-- <ion-badge item-start>9AM-11AM</ion-badge>&nbsp;&nbsp;&nbsp;
+        <ion-badge item-center>3PM-5PM</ion-badge>
+        <ion-badge item-end>5PM-7PM</ion-badge> -->
+    <button ion-button color="kesava" full (click)="viewP(capacity,serviceday,servicetime)">Choose A Package</button>
 </ion-content>

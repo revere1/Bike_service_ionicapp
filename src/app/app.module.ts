@@ -1,16 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Toast } from '@ionic-native/toast/ngx';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { SigninPage } from '../pages/signin/signin';
 import { LocationPage } from '../pages/location/location';
-
-
 import { TabsPage } from '../pages/tabs/tabs';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -86,6 +84,7 @@ import { EditAddressPage } from '../pages/edit-address/edit-address';
     FormsModule,
     Geolocation, 
     Network,
+    Toast,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Connectivity, SpinnerProvider, GoogleMaps, GeocodingService
   ]
