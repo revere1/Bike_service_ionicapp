@@ -24,6 +24,7 @@ import { ViewPackagePage } from '../pages/view-package/view-package';
 import { SelectPackagePage } from '../pages/select-package/select-package';
 import { BookNowPage } from '../pages/book-now/book-now';
 import { LoginPage } from '../pages/login/login';
+import { OtpPage } from '../pages/otp/otp';
 import { MyprofilePage } from '../pages/myprofile/myprofile';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ManageAddressPage } from '../pages/manage-address/manage-address';
@@ -48,7 +49,8 @@ import { EditAddressPage } from '../pages/edit-address/edit-address';
     ManageAddressPage,
     AddAddressPage,
     EditAddressPage,
-    ReviewAddressPage
+    ReviewAddressPage,
+    OtpPage
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ import { EditAddressPage } from '../pages/edit-address/edit-address';
     MyprofilePage,
     ReviewAddressPage,
     AddAddressPage,
-    EditAddressPage
+    EditAddressPage,
+    OtpPage
     
   ],
   providers: [

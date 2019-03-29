@@ -4,11 +4,9 @@ import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
 import { TabsPage } from '../tabs/tabs';
-import { CustomValidators } from '../../customValidator';
-import { OtpPage } from '../otp/otp';
 
 /**
- * Generated class for the LoginPage page.
+ * Generated class for the OtpPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -16,42 +14,40 @@ import { OtpPage } from '../otp/otp';
 
 @IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
+  selector: 'page-otp',
+  templateUrl: 'otp.html',
 })
-export class LoginPage {
-  private signInForm: FormGroup;
+export class OtpPage {
+  private otpForm: FormGroup;
   result: any;
+  mobile: any;
+  otp: any;
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
     public http: Http,
     private formBuilder: FormBuilder,
     public navParams: NavParams,
-    private toast: ToastController
-  ) {
-    this.signInForm = this.formBuilder.group({
-      mobile_number: ['', [Validators.required]],
+    private toast: ToastController) {
+    this.otp = localStorage.getItem('otp');
+    var x= localStorage.getItem('mobile');
+    this.mobile = Number(x);
+    this.otpForm = this.formBuilder.group({
+      otp: ['', [Validators.required]],
     });
   }
-  signIn() {
-    localStorage.setItem('mobile', JSON.parse(this.signInForm.get('mobile_number').value))
-    this.http.get(`${Global.url}customer/login/` + this.signInForm.get('mobile_number').value)
+
+  otpIn() {
+    this.http.get(`${Global.url}customer/otp/` + this.otpForm.get('otp').value+"/"+this.mobile)
       .subscribe(data => {
         const result = data.json()
         if (result.status === 200) {
-          const alert = this.alertCtrl.create({
-            title: 'OTP',
-            subTitle: result.Messages,
-            buttons: ['OK']
-          });
-          localStorage.setItem('otp', JSON.stringify(result.Messages))
-          this.navCtrl.setRoot(OtpPage);
-          alert.present();
-        } else if (result.status === 400) {
           const toast = this.toast.create({
             message: result.Message,
             duration: 2000
           });
+          toast.present();
+          localStorage.setItem('otp', JSON.stringify(result.Messages))
+          this.navCtrl.setRoot(TabsPage);
           toast.present();
         }
       },
@@ -65,4 +61,5 @@ export class LoginPage {
         }
       );
   }
+
 }

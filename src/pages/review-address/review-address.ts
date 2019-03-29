@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Global } from '../../Global';
+import { SigninPage } from '../signin/signin';
 
 /**
  * Generated class for the ReviewAddressPage page.
@@ -16,53 +18,72 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: 'review-address.html',
 })
 export class ReviewAddressPage {
-  private signInForm: FormGroup;
+  private conBookForm: FormGroup;
   result: any;
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
     public http: Http,
     private formBuilder: FormBuilder,
     public navParams: NavParams,
+    private toast: ToastController
     //private storage: Storage
-    ) {
-    this.signInForm = this.formBuilder.group({
-      user_name: ['', [Validators.email]],
-      password: ['', [Validators.required, Validators.maxLength(20)]],
+  ) {
+    this.conBookForm = this.formBuilder.group({
+      full_name: ['', [Validators.required, , Validators.maxLength(20)]],
+      full_address: ['', [Validators.required, Validators.maxLength(100)]],
+      city: ['', [Validators.required]],
+      pincode: ['', [Validators.required, Validators.maxLength(6)]]
     });
-    }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
   }
-//signIn(userName, Password) {
-//this.http.post(`${Global.SERVER_URL}login`, Obj)
-      // .subscribe(data => {
-      //   this.result = JSON.parse(data["_body"])
-      //   if ('') {
-      //     this.signInForm.reset();
-      //     //this.navCtrl.setRoot(SideMenuPage);
-      //     this.storage.set('UserDetails',this.result.data);
-      //    this.storage.set('token',this.result.token)
-      //   } else 
-      //   { 
-      //    alert(this.result.message);
-      //   }
-      // },
-      //   err => {
-      //     //this.navCtrl.setRoot(SideMenuPage);
-      //     const alert = this.alertCtrl.create({
-      //       title: 'Alert',
-      //       subTitle: 'Something went wrong ,Please try again!',
-      //       buttons: ['OK']
-      //     });
-      //     alert.present();
-      //   }
-      // );
- //}
+  confirmIn() {
+    console.log("This is csc: "+this.conBookForm.get('full_name').value)
+    const obj = {
+      full_name: this.conBookForm.get('full_name').value,
+      full_address: this.conBookForm.get('full_address').value,
+      city: this.conBookForm.get('city').value,
+      pincode: this.conBookForm.get('pincode').value
+    }
+    this.http.post(`${Global.url}customeraddress`+"/"+'create', obj)
+      .subscribe(data => {
+        this.result = JSON.parse(data["_body"])
+        if (this.result.status === 201) {
+          this.navCtrl.setRoot(SigninPage)
+          const toast = this.toast.create({
+            message: 'Your Booking Order Confirmation Succeessfully.',
+            duration: 4000
+          });
+          toast.present();
+        } else {
+          const toast = this.toast.create({
+            message: this.result.Message,
+            duration: 2000
+          });
+          toast.present();
+        }
+        //   // this.signInForm.reset();
+        //   //this.navCtrl.setRoot(SideMenuPage);
+        //   // this.storage.set('UserDetails', this.result.data);
+        //   // this.storage.set('token', this.result.token)
+        // } else {
+        //   alert(this.result.message);
+        // }
+      },
+        err => {
+          //this.navCtrl.setRoot(SideMenuPage);
+          const alert = this.alertCtrl.create({
+            title: 'Alert',
+            subTitle: 'Something went wrong ,Please try again!',
+            buttons: ['OK']
+          });
+          alert.present();
+        }
+      );
+  }
   newAcoount() {
     //this.navCtrl.setRoot('SignupPage')
   }
 
-  closeModal(){
-  	this.navCtrl.pop();
+  closeModal() {
+    this.navCtrl.pop();
   }
 }
