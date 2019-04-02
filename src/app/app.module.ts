@@ -31,6 +31,8 @@ import { ManageAddressPage } from '../pages/manage-address/manage-address';
 import { ReviewAddressPage } from '../pages/review-address/review-address';
 import { AddAddressPage } from '../pages/add-address/add-address';
 import { EditAddressPage } from '../pages/edit-address/edit-address';
+
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 @NgModule({
   declarations: [
     MyApp,
@@ -88,6 +90,7 @@ import { EditAddressPage } from '../pages/edit-address/edit-address';
     Geolocation, 
     Network,
     Toast,
+    NativeStorage,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Connectivity, SpinnerProvider, GoogleMaps, GeocodingService
   ]

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, RequestOptions, Headers } from '@angular/http';
+import { Global } from '../../Global';
 
 /**
  * Generated class for the EditAddressPage page.
@@ -16,6 +17,7 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 })
 export class EditAddressPage {
   addresses = [];
+  mobile: number;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -24,12 +26,14 @@ export class EditAddressPage {
   ) {
   }
   ngOnInit() {
-    let mno = '9700443084';
-    this.http.get('http://localhost:3000/customer/myProfile/' + mno).subscribe(
+    var x = localStorage.getItem('mobile');
+    this.mobile = Number(x);
+    this.http.get(`${Global.url}customer/myProfile/`+ this.mobile).subscribe(
       getData => {
         var data = getData.json().response;
         this.addresses.push(data);
         console.log("this is Data: " + JSON.stringify(this.addresses[0].full_name))
+        console.log("this is Data: " + JSON.stringify(this.addresses[0]))
       })
   }
   ionViewDidLoad() {
@@ -48,7 +52,7 @@ export class EditAddressPage {
       "zip": address.zip
     }
     alert("This is parameter: " + JSON.stringify(obj))
-    this.http.put('http://localhost:3000//customeraddress/' + address.id + '/'+address.userid,JSON.stringify(obj), options)
+    this.http.put(`${Global.url}customeraddress/`+ address.id + '/'+address.userid,JSON.stringify(obj), options)
       .subscribe(data => {
         const data1 = data.json()
         alert("This is Result: " + JSON.stringify(data1));

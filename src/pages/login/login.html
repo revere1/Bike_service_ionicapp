@@ -21,10 +21,8 @@
     <ion-card>
       <form [formGroup]="signInForm" (ngSubmit)="signIn()">
         <ion-list>
-  
           <ion-item>
             <ion-label floating>Enter Your Mobile Number</ion-label>
-            <ion-icon name="call" item-right></ion-icon>
             <ion-input type="number" formControlName="mobile_number"></ion-input>
           </ion-item>
           <button ion-button round [disabled]="!signInForm.valid">Login</button>

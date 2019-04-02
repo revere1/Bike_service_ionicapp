@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { Component} from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, App, Nav, ViewController  } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
 import { SigninPage } from '../signin/signin';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the ReviewAddressPage page.
@@ -20,12 +21,15 @@ import { SigninPage } from '../signin/signin';
 export class ReviewAddressPage {
   private conBookForm: FormGroup;
   result: any;
-  constructor(public navCtrl: NavController,
+  constructor(
     public alertCtrl: AlertController,
     public http: Http,
     private formBuilder: FormBuilder,
     public navParams: NavParams,
-    private toast: ToastController
+    private toast: ToastController,
+    private appCtrl: App,
+    private nav: NavController,
+    private viewCtrl: ViewController
     //private storage: Storage
   ) {
     this.conBookForm = this.formBuilder.group({
@@ -47,12 +51,14 @@ export class ReviewAddressPage {
       .subscribe(data => {
         this.result = JSON.parse(data["_body"])
         if (this.result.status === 201) {
-          this.navCtrl.setRoot(SigninPage)
           const toast = this.toast.create({
             message: 'Your Booking Order Confirmation Succeessfully.',
             duration: 4000
           });
           toast.present();
+          this.nav.pop();
+          this.appCtrl.getRootNav().setRoot(TabsPage);
+          // this.app.getRootNav().push(SigninPage);
         } else {
           const toast = this.toast.create({
             message: this.result.Message,
@@ -84,6 +90,6 @@ export class ReviewAddressPage {
   }
 
   closeModal() {
-    this.navCtrl.pop();
+    this.nav.pop();
   }
 }

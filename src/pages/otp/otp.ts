@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
 import { TabsPage } from '../tabs/tabs';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 /**
  * Generated class for the OtpPage page.
@@ -27,9 +28,10 @@ export class OtpPage {
     public http: Http,
     private formBuilder: FormBuilder,
     public navParams: NavParams,
-    private toast: ToastController) {
+    private toast: ToastController,
+    private nativeStorage: NativeStorage) {
     this.otp = localStorage.getItem('otp');
-    var x= localStorage.getItem('mobile');
+    var x = localStorage.getItem('mobile');
     this.mobile = Number(x);
     this.otpForm = this.formBuilder.group({
       otp: ['', [Validators.required]],
@@ -37,7 +39,7 @@ export class OtpPage {
   }
 
   otpIn() {
-    this.http.get(`${Global.url}customer/otp/` + this.otpForm.get('otp').value+"/"+this.mobile)
+    this.http.get(`${Global.url}customer/otp/` + this.otpForm.get('otp').value + "/" + this.mobile)
       .subscribe(data => {
         const result = data.json()
         if (result.status === 200) {
@@ -47,6 +49,11 @@ export class OtpPage {
           });
           toast.present();
           localStorage.setItem('otp', JSON.stringify(result.Messages))
+          // this.nativeStorage.setItem('myitem', this.mobile)
+          //   .then(
+          //     () => console.log('Stored item!', +this.mobile),
+          //     error => console.error('Error storing item', error)
+          //   );
           this.navCtrl.setRoot(TabsPage);
           toast.present();
         }

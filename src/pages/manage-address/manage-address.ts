@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { AddAddressPage } from '../add-address/add-address';
 import { EditAddressPage } from '../edit-address/edit-address';
+import { Global } from '../../Global';
 
 /**
  * Generated class for the ManageAddressPage page.
@@ -18,12 +19,14 @@ import { EditAddressPage } from '../edit-address/edit-address';
 })
 export class ManageAddressPage {
   addresses = [];
+  mobile: number;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
   }
 
   ngOnInit(){
-    let mno = '9700443084';
-    this.http.get('http://localhost:3000/customer/myProfile/'+mno).subscribe(
+    var x = localStorage.getItem('mobile');
+    this.mobile = Number(x);
+    this.http.get(`${Global.url}customer/myProfile/`+this.mobile).subscribe(
       getData =>{
         var data = getData.json().response;
         this.addresses.push(data);

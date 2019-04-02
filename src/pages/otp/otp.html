@@ -12,25 +12,17 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <h3 style="color: red;margin-left: 1em;">This is OTP: {{otp}}</h3>
-  <ion-card>
     <form [formGroup]="otpForm" (ngSubmit)="otpIn()">
       <ion-list>
-
         <ion-item>
           <ion-label floating>Enter Your OTP</ion-label>
           <ion-input type="otp" formControlName="otp"></ion-input>
         </ion-item>
-        <button ion-button round [disabled]="!otpForm.valid">OTP</button>
         <br>
       </ion-list>
+      <button ion-button  round block [disabled]="!otpForm.valid">OTP</button>
     </form>
-    <!-- <p>
-      <small>Don't have an account?
-        <a (click)="newAcoount()">Create Now</a>
-      </small>
-    </p> -->
-  </ion-card>
 </ion-content>
 
