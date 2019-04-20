@@ -9,7 +9,6 @@
 
 <ion-content padding class="modal" >
     <ion-header>
-
         <ion-navbar>
           <ion-title>Add/Review Address</ion-title>    
             <ion-buttons end>
@@ -17,54 +16,29 @@
                 <ion-icon name="close"></ion-icon>
               </button>
             </ion-buttons> 
-          
         </ion-navbar>
-      
       </ion-header>
-  <div>
-      <!-- <ion-card> -->
-          <form [formGroup]="conBookForm" (ngSubmit)="confirmIn()">
-            <ion-list>
-      
-              <ion-item>
-                <ion-label floating>Your Full Name</ion-label>
-                <ion-icon name="person" item-right></ion-icon>
-                <ion-input type="text" formControlName="full_name"></ion-input>
-              </ion-item>
-      
-              <div class="error">
-                <p *ngIf="conBookForm.controls.full_name.hasError('full_name') && conBookForm.controls.full_name.touched">Enter valid Full Name!</p>
-              </div>
-              <ion-item>
-                  <ion-label floating>Full Address</ion-label>
-                  <ion-icon name="person" item-right></ion-icon>
-                  <ion-input type="text" formControlName="full_address"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label floating>city</ion-label>
-                    <ion-icon name="person" item-right></ion-icon>
-                    <ion-input type="text" formControlName="city"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                      <ion-label floating>Pincode</ion-label>
-                      <ion-icon name="person" item-right></ion-icon>
-                      <ion-input type="text" formControlName="pincode"></ion-input>
-                    </ion-item>
-              <!-- <ion-item> -->
-                <!-- <ion-label floating>OTP</ion-label>
-                <ion-icon name="lock" item-right></ion-icon>
-                <ion-input type="password" formControlName="password"></ion-input>
-              </ion-item> 
-      
-              <div class="error">
-                <p *ngIf="conBookForm.controls.password.hasError('required') && conBookForm.controls.password.touched">Password is required!</p>
-                <p *ngIf="conBookForm.controls.password.hasError('minlength') && conBookForm.controls.password.touched">Minimum password length is 8!</p>
-              </div> -->
-      
-              <button ion-button color="orange" full  [disabled]="!conBookForm.valid">Confirm Booking</button>
-              <br>
-            </ion-list>
-          </form>     
-    <!-- </ion-card> -->
-  </div>
+      <ion-list *ngFor="let item of profile">
+          <ion-item>
+            <ion-label floating>Full Name</ion-label>
+            <!-- <ion-icon name="person" item-right></ion-icon> -->
+            <ion-input type="text" [(ngModel)]="item.full_name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Your Address</ion-label>
+            <!-- <ion-icon name="person" item-right></ion-icon> -->
+            <ion-input type="email" [(ngModel)]="item.full_address"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>City</ion-label>
+            <!-- <ion-icon name="person" item-right></ion-icon> -->
+            <ion-input type="text" [(ngModel)]="item.city"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Pincode</ion-label>
+            <!-- <ion-icon name="person" item-right></ion-icon> -->
+            <ion-input type="text" [(ngModel)]="item.pincode"></ion-input>
+          </ion-item>
+            <button ion-button color="orange" full (click)="confirmIn(item)">Confirm Booking</button>
+          </ion-list>
 </ion-content>

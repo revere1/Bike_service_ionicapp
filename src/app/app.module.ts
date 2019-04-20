@@ -32,7 +32,8 @@ import { ReviewAddressPage } from '../pages/review-address/review-address';
 import { AddAddressPage } from '../pages/add-address/add-address';
 import { EditAddressPage } from '../pages/edit-address/edit-address';
 
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -90,8 +91,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
     Geolocation, 
     Network,
     Toast,
-    NativeStorage,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    SecureStorage,
     Connectivity, SpinnerProvider, GoogleMaps, GeocodingService
   ]
 })

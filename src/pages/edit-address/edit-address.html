@@ -28,18 +28,18 @@
       <ion-item>
         <ion-label floating>City</ion-label>
         <!-- <ion-icon name="person" item-right></ion-icon> -->
-        <ion-input type="text" [(ngModel)]="address.full_address"></ion-input>
+        <ion-input type="text" [(ngModel)]="address.city"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Pin Code</ion-label>
         <!-- <ion-icon name="person" item-right></ion-icon> -->
-        <ion-input type="number" [(ngModel)]="address.zip"></ion-input>
+        <ion-input type="number" [(ngModel)]="address.pincode"></ion-input>
       </ion-item>
       <!-- <div class="error">
                 <p *ngIf="signInForm.controls.user_name.hasError('email') && signInForm.controls.user_name.touched">Enter valid email!</p>
               </div> -->
       <!-- <ion-label>Start Typing Your Location</ion-label> -->
-      <button ion-button round>
+      <!-- <button ion-button round>
         <ion-icon name="pin"></ion-icon>&nbsp;&nbsp;&nbsp;Start Typing Your Location
       </button>
       <ion-list radio-group [(ngModel)]="address.addresstype">
@@ -54,9 +54,9 @@
         <p>
           <ion-icon name="checkmark-circle" style="color:green"></ion-icon>&nbsp;&nbsp;Want to make this address
           default
-        </p>
-        <button ion-button color="orange" full (click)="update(address)">Add My Address</button>
-      </ion-list>
+        </p> -->
+        <button ion-button color="orange" full (click)="update(address)">Update My Address</button>
+      <!-- </ion-list> -->
       <br>
     </ion-list>
   </ion-card>

@@ -14,50 +14,51 @@
 
 
 <ion-content>
-  <ion-card>
-    <ion-list>
-      <ion-item>
-        <ion-label floating>Your Full Name</ion-label>
-        <!-- <ion-icon name="person" item-right></ion-icon> -->
-        <ion-input type="text" [(ngModel)]="name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Full Address</ion-label>
-        <!-- <ion-icon name="person" item-right></ion-icon> -->
-        <ion-input type="text" [(ngModel)]="full_address"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>City</ion-label>
-        <!-- <ion-icon name="person" item-right></ion-icon> -->
-        <ion-input type="text" [(ngModel)]="city"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Pin Code</ion-label>
-        <!-- <ion-icon name="person" item-right></ion-icon> -->
-        <ion-input type="number" [(ngModel)]="zip"></ion-input>
-      </ion-item>
-      <!-- <div class="error">
-              <p *ngIf="signInForm.controls.user_name.hasError('email') && signInForm.controls.user_name.touched">Enter valid email!</p>
-            </div> -->
-      <!-- <ion-label>Start Typing Your Location</ion-label> -->
-      <button ion-button round>
-        <ion-icon name="pin"></ion-icon>&nbsp;&nbsp;&nbsp;Start Typing Your Location
-      </button>
-      <ion-list radio-group [(ngModel)]="addresstype">
+    <ion-card>
+      <ion-list>
         <ion-item>
-          <ion-label>Add as Home</ion-label>
-          <ion-radio value="Add as Home" checked></ion-radio>
+          <ion-label floating>Your Full Name</ion-label>
+          <!-- <ion-icon name="person" item-right></ion-icon> -->
+          <ion-input type="text" [(ngModel)]="full_name"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Add as Office</ion-label>
-          <ion-radio value="Add as Office"></ion-radio>
+          <ion-label floating>Full Address</ion-label>
+          <!-- <ion-icon name="person" item-right></ion-icon> -->
+          <ion-input type="text" [(ngModel)]="full_address"></ion-input>
         </ion-item>
-        <p>
-          <ion-icon name="checkmark-circle" style="color:green"></ion-icon> Want to make this address default
-        </p>
-        <button ion-button color="orange" full (click)="update(name, full_address,city,zip,addresstype)">Add My Address</button>
+        <ion-item>
+          <ion-label floating>City</ion-label>
+          <!-- <ion-icon name="person" item-right></ion-icon> -->
+          <ion-input type="text" [(ngModel)]="city"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Pin Code</ion-label>
+          <!-- <ion-icon name="person" item-right></ion-icon> -->
+          <ion-input type="number" [(ngModel)]="pincode"></ion-input>
+        </ion-item>
+        <!-- <div class="error">
+                  <p *ngIf="signInForm.controls.user_name.hasError('email') && signInForm.controls.user_name.touched">Enter valid email!</p>
+                </div> -->
+        <!-- <ion-label>Start Typing Your Location</ion-label> -->
+        <!-- <button ion-button round>
+          <ion-icon name="pin"></ion-icon>&nbsp;&nbsp;&nbsp;Start Typing Your Location
+        </button>
+        <ion-list radio-group [(ngModel)]="address.addresstype">
+          <ion-item>
+            <ion-label>Add as Home</ion-label>
+            <ion-radio value="Add as Home" checked></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Add as Office</ion-label>
+            <ion-radio value="Add as Office"></ion-radio>
+          </ion-item>
+          <p>
+            <ion-icon name="checkmark-circle" style="color:green"></ion-icon>&nbsp;&nbsp;Want to make this address
+            default
+          </p> -->
+          <button ion-button color="orange" full (click)="addAddress(full_name,full_address,city,pincode)">Add My Address</button>
+        <!-- </ion-list> -->
+        <br>
       </ion-list>
-      <br>
-    </ion-list>
-  </ion-card>
-</ion-content>
+    </ion-card>
+  </ion-content>

@@ -9,7 +9,7 @@ import { ListPage } from '../pages/list/list';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,7 +24,7 @@ export class MyApp {
   constructor(public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public nativeStorage: NativeStorage) {
+    public secureStorage: SecureStorage) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation

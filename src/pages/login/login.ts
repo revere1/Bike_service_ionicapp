@@ -3,9 +3,8 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
-import { TabsPage } from '../tabs/tabs';
-import { CustomValidators } from '../../customValidator';
 import { OtpPage } from '../otp/otp';
+import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
 
 /**
  * Generated class for the LoginPage page.
@@ -27,14 +26,24 @@ export class LoginPage {
     public http: Http,
     private formBuilder: FormBuilder,
     public navParams: NavParams,
-    private toast: ToastController
+    private toast: ToastController,
+    private secureStorage: SecureStorage
   ) {
     this.signInForm = this.formBuilder.group({
       mobile_number: ['', [Validators.required]],
     });
   }
   signIn() {
-    localStorage.setItem('mobile', JSON.parse(this.signInForm.get('mobile_number').value))
+    // Global.mobileNumber = this.signInForm.get('mobile_number').value;
+    // this.secureStorage.create('mobNum')
+    // .then((storage: SecureStorageObject) => {
+    //   storage.set('mobNum', Global.mobileNumber)
+    //   .then(
+    //     data => console.log(data),
+    //     error => console.log(error)
+    //     );
+    //   });
+   localStorage.setItem('mobile', JSON.parse(this.signInForm.get('mobile_number').value))
     this.http.get(`${Global.url}customer/login/` + this.signInForm.get('mobile_number').value)
       .subscribe(data => {
         const result = data.json()

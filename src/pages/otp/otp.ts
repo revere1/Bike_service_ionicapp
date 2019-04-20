@@ -28,8 +28,7 @@ export class OtpPage {
     public http: Http,
     private formBuilder: FormBuilder,
     public navParams: NavParams,
-    private toast: ToastController,
-    private nativeStorage: NativeStorage) {
+    private toast: ToastController) {
     this.otp = localStorage.getItem('otp');
     var x = localStorage.getItem('mobile');
     this.mobile = Number(x);
@@ -41,7 +40,8 @@ export class OtpPage {
   otpIn() {
     this.http.get(`${Global.url}customer/otp/` + this.otpForm.get('otp').value + "/" + this.mobile)
       .subscribe(data => {
-        const result = data.json()
+        const result = data.json();
+        console.log("This is Result: "+JSON.stringify(result.payLoad.id_user))
         if (result.status === 200) {
           const toast = this.toast.create({
             message: result.Message,
@@ -49,12 +49,13 @@ export class OtpPage {
           });
           toast.present();
           localStorage.setItem('otp', JSON.stringify(result.Messages))
-          // this.nativeStorage.setItem('myitem', this.mobile)
-          //   .then(
-          //     () => console.log('Stored item!', +this.mobile),
-          //     error => console.error('Error storing item', error)
-          //   );
+          localStorage.setItem('userId', JSON.stringify(result.payLoad.id_user))
           this.navCtrl.setRoot(TabsPage);
+        } else {
+          const toast = this.toast.create({
+            message: result.Message,
+            duration: 2000
+          });
           toast.present();
         }
       },

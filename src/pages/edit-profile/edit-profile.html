@@ -24,27 +24,13 @@
         <ion-item>
           <ion-label floating>Your E-Mail ID </ion-label>
           <!-- <ion-icon name="person" item-right></ion-icon> -->
-          <ion-input type="text" [(ngModel)]="item.email"></ion-input>
+          <ion-input type="email" [(ngModel)]="item.email"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Your Mobile Number</ion-label>
           <!-- <ion-icon name="person" item-right></ion-icon> -->
           <ion-input type="number" [(ngModel)]="item.mobile_number"></ion-input>
         </ion-item>
-        <ion-item>
-          <ion-label floating>Full Address</ion-label>
-          <!-- <ion-icon name="person" item-right></ion-icon> -->
-          <ion-input type="text" [(ngModel)]="item.full_address"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Zip Code</ion-label>
-          <!-- <ion-icon name="person" item-right></ion-icon> -->
-          <ion-input type="number" [(ngModel)]="item.zip"></ion-input>
-        </ion-item>
-        <!-- <div class="error">
-              <p *ngIf="signInForm.controls.user_name.hasError('email') && signInForm.controls.user_name.touched">Enter valid email!</p>
-            </div> -->
-
         <ion-item>
           <ion-label floating>Your Date Of Birth</ion-label>
           <!-- <ion-icon name="person" item-right></ion-icon> -->

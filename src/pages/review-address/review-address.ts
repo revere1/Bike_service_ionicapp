@@ -21,6 +21,8 @@ import { TabsPage } from '../tabs/tabs';
 export class ReviewAddressPage {
   private conBookForm: FormGroup;
   result: any;
+  profile= [];
+  mobile: number;
   constructor(
     public alertCtrl: AlertController,
     public http: Http,
@@ -31,21 +33,27 @@ export class ReviewAddressPage {
     private nav: NavController,
     private viewCtrl: ViewController
     //private storage: Storage
-  ) {
-    this.conBookForm = this.formBuilder.group({
-      full_name: ['', [Validators.required, , Validators.maxLength(20)]],
-      full_address: ['', [Validators.required, Validators.maxLength(100)]],
-      city: ['', [Validators.required]],
-      pincode: ['', [Validators.required, Validators.maxLength(6)]]
-    });
+  ) {    
   }
-  confirmIn() {
-    console.log("This is csc: "+this.conBookForm.get('full_name').value)
+
+  ngOnInit(){
+    var x = localStorage.getItem('mobile');
+    this.mobile = Number(x);
+    this.http.get(`${Global.url}customer/myProfile/`+this.mobile).subscribe(
+      getData =>{
+        var data = getData.json().response;
+        this.profile.push(data);
+        console.log("this is Data: "+JSON.stringify(data))
+      })
+  }
+
+  confirmIn(item) {
     const obj = {
-      full_name: this.conBookForm.get('full_name').value,
-      full_address: this.conBookForm.get('full_address').value,
-      city: this.conBookForm.get('city').value,
-      pincode: this.conBookForm.get('pincode').value
+      full_name:item.full_name,
+      full_address:item.full_address,
+      city:item.city,
+      pincode:item.pincode,
+      id_user: item.id_user
     }
     this.http.post(`${Global.url}customeraddress`+"/"+'create', obj)
       .subscribe(data => {

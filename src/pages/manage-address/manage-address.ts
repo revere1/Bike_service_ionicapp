@@ -18,30 +18,37 @@ import { Global } from '../../Global';
   templateUrl: 'manage-address.html',
 })
 export class ManageAddressPage {
-  addresses = [];
+  manageAddress: any;
   mobile: number;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private http: Http) {
   }
 
   ngOnInit(){
-    var x = localStorage.getItem('mobile');
-    this.mobile = Number(x);
-    this.http.get(`${Global.url}customer/myProfile/`+this.mobile).subscribe(
+    const userId = localStorage.getItem('userId');
+    console.log('user',userId);
+    this.http.get(`${Global.url}customeraddress/`+userId).subscribe(
       getData =>{
-        var data = getData.json().response;
-        this.addresses.push(data);
-        console.log("this is Data: "+JSON.stringify(this.addresses[0].full_name))
+        this.manageAddress = getData.json().response;
+        console.log('stat',this.manageAddress.status)
+        console.log("this is Data for Manage Address: "+JSON.stringify(this.manageAddress))
       })
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ManageAddressPage');
-  }
-
   viewAA(){
     this.navCtrl.push(AddAddressPage)
   }
-  viewEA(){
+  viewEA(addressId){
+    localStorage.setItem('addId', JSON.stringify(addressId))
     this.navCtrl.push(EditAddressPage)
+  }
+  deleteAdd(addressId){
+    this.http.delete(`${Global.url}customeraddress/`+addressId).subscribe(
+      getData =>{
+        this.manageAddress = getData.json().response;
+        console.log('stat',this.manageAddress)
+        // console.log("this is Data for Manage Address: "+JSON.stringify(this.manageAddress))
+      })
   }
 }

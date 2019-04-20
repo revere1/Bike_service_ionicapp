@@ -72,6 +72,7 @@ export class ViewPackagePage {
       "time_slot": c,
       "status": "Active"
     }
+    console.log("this is Bookings: "+JSON.stringify(obj))
     this.http.post(Global.url + 'customerbookings/', obj, options)
       .subscribe(data => {
         const data1 = data.json()
