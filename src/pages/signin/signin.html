@@ -39,8 +39,8 @@
   <ion-content>
     <div [ngSwitch]="pet">
       <ion-list *ngSwitchCase="'order'">
-        <!-- <div style="margin-top: 7em;">No Order Received</div> -->
-        <ion-card>      
+      <div *ngIf="!myOrderData" style="margin-top: 7em;margin-left: 5em;">No Orders Found</div>
+        <ion-card *ngFor="let order of myorders">     
           <ion-card-content>
             <ion-row no-padding>      
               <ion-col class="event-name">
@@ -48,18 +48,18 @@
                 <p class="day">
                   Amount-Rs.499
                  </p>
-                <p class="event-location">
-                  Bike Repair & Service
+                <p class="event-location">                 
+                  {{order.service_name}}
                 </p>
               </ion-col>
               <ion-col col-6 text-center>
                 <b>
-                  Booking ID:461532
+                  Booking ID:{{order.id_book_services}}
                 </b>            
               </ion-col>          
               <ion-col>
                 <p class="day">
-                     Schedule-14 may,2019 | 11am to 1pm
+                     Schedule-{{order.day_slot}} | {{order.time_slot}}
                 </p> 
               <ion-item no-lines padding>
                 <!-- <ion-badge>VIEW</ion-badge> -->

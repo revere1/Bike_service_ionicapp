@@ -4,7 +4,7 @@ import { HomePage } from '../home/home';
 
 import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-//import { Global } from '../../Global';
+import { Global } from '../../Global';
 
 
 /**
@@ -21,9 +21,11 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class SigninPage {
   orders: boolean = false;
+  myOrderData: boolean = false;
   order1: any;
   pet: string = "order";
   list: string = "list1";
+  myorders: any;
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
     public http: Http,
@@ -32,14 +34,21 @@ export class SigninPage {
     ) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SigninPage');
+  ngOnInit(){
+    this.order();
   }
-
   order(){
-    alert("hii")
-  this.order1 = "No Order Found...."
-  this.orders = true;
+    const userId = localStorage.getItem('userId');
+    console.log('orderuser',userId);
+    this.http.get(`${Global.url}customerbookings/`+userId).subscribe(
+      getData =>{
+        this.myorders = getData.json().result;
+        if (this.myorders.length === 0 || this.myorders === 'no records found') {
+          this.myOrderData = true;
+          return false;
+        }
+        this.myOrderData = true;
+      })
   }
   
 }

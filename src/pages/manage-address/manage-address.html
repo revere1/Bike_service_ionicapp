@@ -19,14 +19,14 @@
 
 
 <ion-content>
-  <ion-card *ngFor="let address of manageAddress">
+  <ion-card *ngFor="let address of manageAddress" (click)="chnDefAddress(address.id_user,address.id_user_address)">
     <ion-card-content>    
       <ion-buttons end *ngIf="address.status != 'InActive'">
         <ion-icon name="checkmark-circle" style="color:green"></ion-icon>
       </ion-buttons>
-      <!-- <ion-buttons end >
+      <ion-buttons end *ngIf="address.status == 'InActive'">
         <ion-icon name="checkmark-circle"></ion-icon>
-      </ion-buttons> -->
+      </ion-buttons>
       {{address.full_name}}
       <p>{{address.full_address}}-{{address.pincode}}</p>
       <button ion-button small color="light" round (click)="viewEA(address.id_user_address)">Edit</button>
