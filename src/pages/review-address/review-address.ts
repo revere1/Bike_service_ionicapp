@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController, 
 import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
-import { SigninPage } from '../signin/signin';
+import { MyOrderPage } from '../my-order/my-order';
 import { TabsPage } from '../tabs/tabs';
 
 /**
@@ -53,7 +53,8 @@ export class ReviewAddressPage {
       full_address:item.full_address,
       city:item.city,
       pincode:item.pincode,
-      id_user: item.id_user
+      id_user: item.id_user,
+      status: "Active"
     }
     this.http.post(`${Global.url}customeraddress`+"/"+'create', obj)
       .subscribe(data => {
@@ -66,7 +67,6 @@ export class ReviewAddressPage {
           toast.present();
           this.nav.pop();
           this.appCtrl.getRootNav().setRoot(TabsPage);
-          // this.app.getRootNav().push(SigninPage);
         } else {
           const toast = this.toast.create({
             message: this.result.Message,

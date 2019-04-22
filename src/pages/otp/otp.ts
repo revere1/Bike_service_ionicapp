@@ -5,6 +5,8 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
 import { TabsPage } from '../tabs/tabs';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { MyprofilePage } from '../myprofile/myprofile';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 
 /**
  * Generated class for the OtpPage page.
@@ -41,7 +43,7 @@ export class OtpPage {
     this.http.get(`${Global.url}customer/otp/` + this.otpForm.get('otp').value + "/" + this.mobile)
       .subscribe(data => {
         const result = data.json();
-        console.log("This is Result: "+JSON.stringify(result.payLoad.id_user))
+        console.log("This is Result: "+JSON.stringify(result.payLoad))
         if (result.status === 200) {
           const toast = this.toast.create({
             message: result.Message,
@@ -50,7 +52,12 @@ export class OtpPage {
           toast.present();
           localStorage.setItem('otp', JSON.stringify(result.Messages))
           localStorage.setItem('userId', JSON.stringify(result.payLoad.id_user))
-          this.navCtrl.setRoot(TabsPage);
+          if(!result.payLoad.full_name){
+            console.log("This is Resulrr: "+result.full_name)
+          this.navCtrl.setRoot(EditProfilePage);
+        } else {
+          this.navCtrl.setRoot(TabsPage)
+        }
         } else {
           const toast = this.toast.create({
             message: result.Message,

@@ -39,7 +39,6 @@ export class EditProfilePage {
   }
 
   update(item){
-    console.log("this is Item: "+JSON.stringify(item.full_name))
     const headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json');

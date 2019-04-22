@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 
 import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
-
+import { MyorderDetailsPage } from '../myorder-details/myorder-details';
 
 /**
- * Generated class for the SigninPage page.
+ * Generated class for the MyOrderPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -16,10 +15,10 @@ import { Global } from '../../Global';
 
 @IonicPage()
 @Component({
-  selector: 'page-signin',
-  templateUrl: 'signin.html',
+  selector: 'page-my-order',
+  templateUrl: 'my-order.html',
 })
-export class SigninPage {
+export class MyOrderPage {
   orders: boolean = false;
   myOrderData: boolean = false;
   order1: any;
@@ -31,6 +30,7 @@ export class SigninPage {
     public http: Http,
     private formBuilder: FormBuilder,
     public navParams: NavParams,
+    private toast: ToastController
     ) {
   }
 
@@ -43,6 +43,7 @@ export class SigninPage {
     this.http.get(`${Global.url}customerbookings/`+userId).subscribe(
       getData =>{
         this.myorders = getData.json().result;
+        console.log('orderuser result: ',this.myorders);
         if (this.myorders.length === 0 || this.myorders === 'no records found') {
           this.myOrderData = true;
           return false;
@@ -50,5 +51,9 @@ export class SigninPage {
         this.myOrderData = true;
       })
   }
-  
+
+  viewSP(bookId,userId){
+    console.log("Thi jds")
+    this.navCtrl.push(MyorderDetailsPage,{bid: bookId, uid: userId})
+  }
 }

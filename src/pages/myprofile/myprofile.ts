@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-// import { SigninPage } from '../signin/signin';
 import { ManageAddressPage } from '../manage-address/manage-address';
 import { EditProfilePage } from '../edit-profile/edit-profile';
 
