@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
 import { MyOrderPage } from '../my-order/my-order';
@@ -47,13 +47,18 @@ export class MyorderDetailsPage {
       })
   }
   cancelOrder(){
-    this.http.patch(`${Global.url}customerbookings/cancel/${this.details.id_user}/${this.details.id_book_services}`).subscribe(
+    const headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    const getApiUrl: string = `${Global.url}customerbookings/cancel/${this.details.id_user}/${this.details.id_book_services}`;
+    this.http.patch(getApiUrl, options).subscribe(
       getData =>{
-        var cancelOrder = getData.json().result;
-        console.log('orderuser result: ',JSON.stringify(cancelOrder));
-        if(cancelOrder.status === 200){
+        var cancelOrderDetails = getData.json();
+        console.log('orderuser result: ',JSON.stringify(cancelOrderDetails));
+        if(cancelOrderDetails.status === 200){
         const toast = this.toast.create({
-          message: cancelOrder.Message,
+          message: cancelOrderDetails.Message,
           duration: 2000
         });
         toast.present();

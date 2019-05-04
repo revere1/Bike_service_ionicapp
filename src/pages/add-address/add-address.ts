@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { Http, RequestOptions, Headers} from '@angular/http';
 import {Global}  from '../../Global';
 import { ManageAddressPage } from '../manage-address/manage-address';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
  * Generated class for the AddAddressPage page.
@@ -17,27 +18,35 @@ import { ManageAddressPage } from '../manage-address/manage-address';
   templateUrl: 'add-address.html',
 })
 export class AddAddressPage {
+  addForm: FormGroup;
    profile=[];
    userId: any;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
+    private formBuilder: FormBuilder,
     private http: Http,
     private toast: ToastController
     ) {
-      this.userId =localStorage.getItem('userId')
-  }
+      this.addForm = this.formBuilder.group({
+        full_name: ['',[Validators.required,Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'),Validators.minLength(6), Validators.maxLength(30)]],      
+        full_address : ['',[Validators.required,Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'),Validators.minLength(6), Validators.maxLength(150)]],
+        city: ['', [Validators.required,Validators.minLength(6), Validators.maxLength(20)]],
+        pincode: ['',[Validators.required,Validators.minLength(5), Validators.maxLength(6)]],
+      });
+      this.userId =localStorage.getItem('userId');
+    }
 
-  addAddress(full_name,full_address,city,pincode){
+    addAddress(){
     const headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
     let obj = {
-      full_name:full_name,
-      full_address:full_address,
-      city:city,
-      pincode:pincode,
+      full_name:this.addForm.value.full_name,
+      full_address:this.addForm.value.full_address,
+      city:this.addForm.value.city,
+      pincode:this.addForm.value.pincode,
       id_user:this.userId,
       status:"Active" 
     }
@@ -63,5 +72,5 @@ export class AddAddressPage {
       alert(err)
     })
   }
+  }
 
-}

@@ -15,14 +15,17 @@ import { BookNowPage } from '../book-now/book-now';
   templateUrl: 'select-package.html',
 })
 export class SelectPackagePage {
-
+  sName: any;
+  dSlot: any;
+  tSlot: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SelectPackagePage');
+    this.sName = this.navParams.get('sName');
+    this.dSlot = this.navParams.get('dSlot');
+    this.tSlot = this.navParams.get('tSlot');
+    console.log("This is bookNavParams: "+this.sName, this.dSlot, this.tSlot)
   }
   viewSP(){
-    this.navCtrl.push(BookNowPage)
+    console.log("This is bookNavParams: "+this.sName, this.dSlot, this.tSlot)
+    this.navCtrl.push(BookNowPage,{serName: this.sName, daySlot: this.dSlot, timeSlot: this.tSlot})
   }
 }

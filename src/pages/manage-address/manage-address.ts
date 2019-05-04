@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { AddAddressPage } from '../add-address/add-address';
 import { EditAddressPage } from '../edit-address/edit-address';
 import { Global } from '../../Global';
@@ -46,6 +46,8 @@ export class ManageAddressPage {
     this.navCtrl.push(AddAddressPage)
   }
   viewEA(addressId){
+    event.preventDefault();
+    event.stopPropagation();
     localStorage.setItem('addId', JSON.stringify(addressId))
     this.navCtrl.push(EditAddressPage)
   }
@@ -69,13 +71,17 @@ export class ManageAddressPage {
           });
           toast.present();
         }
-        this.navCtrl.push(ManageAddressPage)
-        // console.log("this is Data for Manage Address: "+JSON.stringify(this.manageAddress))
       })
   }
 
   chnDefAddress(id_user,id_user_address){
-    this.http.patch(`${Global.url}customeraddress/addressStatus/`+id_user+"/"+id_user_address).subscribe(
+    event.preventDefault();
+    event.stopPropagation();
+    const headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    this.http.patch(`${Global.url}customeraddress/addressStatus/`+id_user+"/"+id_user_address, options).subscribe(
       getData =>{
         this.manageAddress = getData.json().response;
         console.log('stat',this.manageAddress)       

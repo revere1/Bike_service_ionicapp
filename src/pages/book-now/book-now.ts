@@ -18,34 +18,21 @@ import { Global } from '../../Global';
   templateUrl: 'book-now.html',
 })
 export class BookNowPage {
-data: any;
 serviceName: any;
-time: any;
-day: any;
+daySlot: any;
+timeSlot: any;
   constructor(private modalController:ModalController,
     public navCtrl: NavController, 
     public navParams: NavParams,
     private http: Http) {
-      const x= localStorage.getItem('mobile');
-      const mno = Number(x);
-      const id = localStorage.getItem('id');
-      this.http.get(`${Global.url}`+'customerbookings/'+id)
-      .subscribe(
-        getData =>{
-          const data = getData.json();
-          this.data = data.result[0];
-          this.serviceName = this.data.service_name;
-          this.time = this.data.time_slot;
-          this.day = this.data.day_slot;
-        })
-  }
-
-  getData(data){
-      
+      this.serviceName = this.navParams.get('serName');
+      this.daySlot = this.navParams.get('daySlot');
+      this.timeSlot = this.navParams.get('timeSlot');
   }
 
   openFilterModal(){
-    let openFilterModal = this.modalController.create(ReviewAddressPage);
+    console.log('dayslot', this.daySlot)
+    let openFilterModal = this.modalController.create(ReviewAddressPage, {serName: this.serviceName, dSlot:this.daySlot, tSlot: this.timeSlot});
     openFilterModal.present();
 
   }

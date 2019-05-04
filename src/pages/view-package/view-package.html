@@ -52,11 +52,12 @@
         <ion-radio value="Tomorrow" disable="true"></ion-radio>
       </ion-item>
     </ion-col>
-    <ion-col col-6>
+    <ion-col col-12>
       <ion-item>
         <ion-label>Future</ion-label>
         <!-- <ion-radio value="Feature" disable="true"></ion-radio> -->
-        <ion-datetime display-format="MMM DD YYYY "></ion-datetime>
+        <ion-input  type="date" [(ngModel)]="serviceday"></ion-input>
+        <!-- <ion-date display-format="MMM DD YYYY "></ion-date> -->
       </ion-item>
     </ion-col>
   </ion-row>

@@ -16,23 +16,23 @@
       </ion-searchbar>
  </ion-navbar>
   </ion-header> -->
-  <ion-content>
+  <ion-content disable-scroll>
     <img src="assets/imgs/bike1.jpg" class="img-position">
     <ion-card>
       <form [formGroup]="signInForm" (ngSubmit)="signIn()">
         <ion-list>
-          <ion-item>
-            <ion-label floating>Enter Your Mobile Number</ion-label>
-            <ion-input type="number" formControlName="mobile_number"></ion-input>
+          <ion-item>            
+            <ion-label floating>+91-Enter Your Mobile Number</ion-label>
+          <ion-input type="number" formControlName="mobile_number"></ion-input>
           </ion-item>
+          <div class="error">
+            <p *ngIf="signInForm.controls.mobile_number.hasError('required') && signInForm.controls.mobile_number.touched">mobile number is required!</p>
+            <p *ngIf="signInForm.controls.mobile_number.hasError('minlength') && signInForm.controls.mobile_number.touched">minimum mobile number length is 10!</p>
+            <p *ngIf="signInForm.controls.mobile_number.hasError('maxlength') && signInForm.controls.mobile_number.touched"> maximum mobile number length is 12!</p>
+          </div> 
           <button ion-button round [disabled]="!signInForm.valid">Login</button>
           <br>
         </ion-list>
       </form>
-      <!-- <p>
-        <small>Don't have an account?
-          <a (click)="newAcoount()">Create Now</a>
-        </small>
-      </p> -->
     </ion-card>
   </ion-content>

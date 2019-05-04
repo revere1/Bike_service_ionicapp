@@ -53,7 +53,6 @@ export class MyOrderPage {
   }
 
   viewSP(bookId,userId){
-    console.log("Thi jds")
     this.navCtrl.push(MyorderDetailsPage,{bid: bookId, uid: userId})
   }
 }

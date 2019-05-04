@@ -43,7 +43,6 @@ export class OtpPage {
     this.http.get(`${Global.url}customer/otp/` + this.otpForm.get('otp').value + "/" + this.mobile)
       .subscribe(data => {
         const result = data.json();
-        console.log("This is Result: "+JSON.stringify(result.payLoad))
         if (result.status === 200) {
           const toast = this.toast.create({
             message: result.Message,
