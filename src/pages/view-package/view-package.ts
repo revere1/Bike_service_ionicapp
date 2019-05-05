@@ -23,88 +23,45 @@ export class ViewPackagePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private http: Http, private toast: ToastController) {
+    private http: Http,
+    private toast: ToastController) {
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ViewPackagePage');
-  }
-
   // 
   ngOnInit() {
-    const x = localStorage.getItem('mobile');
-    const mno = Number(x);
-    this.http.get(Global.url + 'customer/myProfile/' + mno).subscribe(
-      getData => {
-        this.data = getData.json().response;
-        console.log("This is Good" + JSON.stringify(this.data.id_user))
-        localStorage.setItem('id', JSON.stringify(this.data.id_user))
-        this.package.push(this.data);
-        console.log("this is Data: " + JSON.stringify(this.package))
-      })
 
   }
 
-  async viewP(a, b, c) {
-    if (b === 'Today') {
+  viewP(a, b, c) {
+    if (!a) {
+      const toast = this.toast.create({
+        message: 'Please Enter Capcity',
+        duration: 1000
+      });
+      toast.present();
+    } else if (!b) {
+      const toast = this.toast.create({
+        message: 'Please Enter Service Day',
+        duration: 1000
+      });
+      toast.present();
+    }
+    else if (b === 'Today') {
       b = new Date().toISOString().slice(0, 10);
       console.log("This is date: " + b)
-    } else if (b === 'Tomorrow') {
+    }
+    else if (b === 'Tomorrow') {
       b = new Date();
       b = new Date(b.getTime() + (1000 * 60 * 60 * 24));
       b = b.toISOString().slice(0, 10);
-      console.log("This is date tomorrow1: " + b)
-    } else {
-      console.log("This is else" + b)
+      console.log("This is date tomorrow1: " + a, b, c)
     }
-
-    const headers = new Headers();
-    headers.append("Accept", 'application/json');
-    headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({ headers: headers });
-    let obj = {
-      "id_user": this.data.id_user,
-      "user_mobile_number": this.data.mobile_number,
-      "payment": false,
-      "user_emailid": this.data.email,
-      "service_name": a,
-      "day_slot": b,
-      "time_slot": c,
-      "status": "Active"
-    }
-    this.http.post(Global.url + 'customerbookings/', obj, options)
-      .subscribe(data => {
-        const data1 = data.json()
-        if (data1.status === 201) {
-          this.navCtrl.push(SelectPackagePage)
-          const toast = this.toast.create({
-            message: data1.Message,
-            duration: 2000
-          });
-          toast.present();
-        } else {
-          const toast = this.toast.create({
-            message: data1.Message,
-            duration: 2000
-          });
-          toast.present();
-        }
-      }, (err) => {
-        const toast = this.toast.create({
-          message: 'Network Error',
-          duration: 2000
-        });
-        toast.present();
-      })
+    if (!c) {
+      const toast = this.toast.create({
+        message: 'Please Enter Service Slot',
+        duration: 1000
+      });
+      toast.present();
+    } else
+      this.navCtrl.push(SelectPackagePage, { sName: a, dSlot: b, tSlot: c })
   }
-
-  // async presentToastWithOptions() {
-  //   const toast = await this.toast.create({
-  //     message: 'Click to Close',
-  //     showCloseButton: true,
-  //     position: 'top',
-  //     closeButtonText: 'Done'
-  //   });
-  //   toast.present();
-  // }
 }

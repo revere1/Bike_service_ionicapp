@@ -3,9 +3,9 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
-import { TabsPage } from '../tabs/tabs';
-import { CustomValidators } from '../../customValidator';
 import { OtpPage } from '../otp/otp';
+import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
@@ -27,26 +27,43 @@ export class LoginPage {
     public http: Http,
     private formBuilder: FormBuilder,
     public navParams: NavParams,
-    private toast: ToastController
+    private toast: ToastController,
+    private secureStorage: SecureStorage
   ) {
-    this.signInForm = this.formBuilder.group({
-      mobile_number: ['', [Validators.required]],
+    this.signInForm = this.formBuilder.group({   
+      mobile_number: ['', [Validators.required,Validators.minLength(10), Validators.maxLength(12)]],
     });
   }
   signIn() {
+    // Global.mobileNumber = this.signInForm.get('mobile_number').value;
+    // this.secureStorage.create('mobNum')
+    // .then((storage: SecureStorageObject) => {
+    //   storage.set('mobNum', Global.mobileNumber)
+    //   .then(
+    //     data => console.log(data),
+    //     error => console.log(error)
+    //     );
+    //   });
     localStorage.setItem('mobile', JSON.parse(this.signInForm.get('mobile_number').value))
     this.http.get(`${Global.url}customer/login/` + this.signInForm.get('mobile_number').value)
       .subscribe(data => {
         const result = data.json()
         if (result.status === 200) {
-          const alert = this.alertCtrl.create({
-            title: 'OTP',
-            subTitle: result.Messages,
-            buttons: ['OK']
-          });
-          localStorage.setItem('otp', JSON.stringify(result.Messages))
-          this.navCtrl.setRoot(OtpPage);
-          alert.present();
+          if (result.Messages === undefined) {
+            const toast = this.toast.create({
+              message: `This is OTP:${result.Messages}`,
+              duration: 2000
+            });
+            toast.present();
+          } else {
+            const toast = this.toast.create({
+              message: `This is OTP:${result.Messages}`,
+              duration: 2000
+            });
+            toast.present();
+            localStorage.setItem('otp', JSON.stringify(result.Messages))
+            this.navCtrl.setRoot(OtpPage);
+          }
         } else if (result.status === 400) {
           const toast = this.toast.create({
             message: result.Message,
@@ -65,4 +82,5 @@ export class LoginPage {
         }
       );
   }
+  
 }

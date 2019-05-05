@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
-import { Http } from '@angular/http';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, App, Nav, ViewController } from 'ionic-angular';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
-import { SigninPage } from '../signin/signin';
+import { MyOrderPage } from '../my-order/my-order';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the ReviewAddressPage page.
@@ -18,72 +19,150 @@ import { SigninPage } from '../signin/signin';
   templateUrl: 'review-address.html',
 })
 export class ReviewAddressPage {
-  private conBookForm: FormGroup;
+  private editAddressForm: FormGroup;
   result: any;
-  constructor(public navCtrl: NavController,
+  profile = [];
+  mobile: number;
+  data: any;
+  package = [];
+  serviceName: any;
+  daySlot: any;
+  timeSlot: any;
+  userId: any;
+  addId: any;
+  editAddressFormData: any;
+  constructor(
     public alertCtrl: AlertController,
     public http: Http,
     private formBuilder: FormBuilder,
     public navParams: NavParams,
-    private toast: ToastController
-    //private storage: Storage
+    private toast: ToastController,
+    private appCtrl: App,
+    private nav: NavController,
+    private viewCtrl: ViewController
   ) {
-    this.conBookForm = this.formBuilder.group({
-      full_name: ['', [Validators.required, , Validators.maxLength(20)]],
-      full_address: ['', [Validators.required, Validators.maxLength(100)]],
-      city: ['', [Validators.required]],
-      pincode: ['', [Validators.required, Validators.maxLength(6)]]
+    this.serviceName = this.navParams.get('serName')
+    this.daySlot = this.navParams.get('dSlot')
+    this.timeSlot = this.navParams.get('tSlot')
+    this.editAddressForm = this.formBuilder.group({
+      full_name: ['', [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(30)]],
+      full_address: ['', [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(150)]],
+      city: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      pincode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(6)]],
     });
   }
+
+  ngOnInit() {
+    this.getProfileData();
+    this.viewAddress();
+
+  }
+  getProfileData() {
+    const x = localStorage.getItem('mobile');
+    const mno = Number(x);
+    this.http.get(Global.url + 'customer/myProfile/' + mno).subscribe(
+      getData => {
+        this.data = getData.json().response;
+        localStorage.setItem('id', JSON.stringify(this.data.id_user))
+        this.package.push(this.data);
+      })
+  }
+  viewAddress() {
+    this.userId = localStorage.getItem('userId');
+    this.addId = localStorage.getItem('addId')
+    this.http.get(`${Global.url}customeraddress/` + this.userId + "/" + this.addId).subscribe(
+      getData => {
+        this.editAddressFormData = getData.json().response[0];
+        this.editAddressForm = this.formBuilder.group({
+          full_name: [this.editAddressFormData.full_name, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(30)]],
+          full_address: [this.editAddressFormData.full_address, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(150)]],
+          city: [this.editAddressFormData.city, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+          pincode: [this.editAddressFormData.pincode, [Validators.required, Validators.minLength(5), Validators.maxLength(6)]],
+        })
+      })
+  }
   confirmIn() {
-    console.log("This is csc: "+this.conBookForm.get('full_name').value)
-    const obj = {
-      full_name: this.conBookForm.get('full_name').value,
-      full_address: this.conBookForm.get('full_address').value,
-      city: this.conBookForm.get('city').value,
-      pincode: this.conBookForm.get('pincode').value
+    const headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    let obj = {
+      "id_user": this.data.id_user,
+      "user_mobile_number": this.data.mobile_number,
+      "payment": false,
+      "user_emailid": this.data.email,
+      "service_name": this.serviceName,
+      "day_slot": this.daySlot,
+      "time_slot": this.timeSlot,
+      "status": "Active"
     }
-    this.http.post(`${Global.url}customeraddress`+"/"+'create', obj)
+    this.http.post(Global.url + 'customerbookings/', obj, options)
       .subscribe(data => {
-        this.result = JSON.parse(data["_body"])
-        if (this.result.status === 201) {
-          this.navCtrl.setRoot(SigninPage)
+        const data1 = data.json()
+        if (data1.status === 201) {
           const toast = this.toast.create({
-            message: 'Your Booking Order Confirmation Succeessfully.',
-            duration: 4000
+            message: data1.Message,
+            duration: 2000
           });
           toast.present();
+          let obj = {
+            "full_name": "" + this.editAddressForm.value.full_name,
+            "full_address": "" + this.editAddressForm.value.full_address,
+            "city": "" + this.editAddressForm.value.city,
+            "pincode": "" + this.editAddressForm.value.pincode,
+            "id_user": this.editAddressFormData.id_user,
+            "status": "Active"
+          }
+          this.http.post(`${Global.url}customeraddress` + "/" + 'create', obj)
+            .subscribe(data => {
+              this.result = JSON.parse(data["_body"])
+              if (this.result.status === 201) {
+                const toast = this.toast.create({
+                  message: 'Your Booking Order Confirmation Succeessfully.',
+                  duration: 4000
+                });
+                toast.present();
+                this.nav.pop();
+                this.appCtrl.getRootNav().setRoot(TabsPage);
+              } else {
+                const toast = this.toast.create({
+                  message: this.result.Message,
+                  duration: 2000
+                });
+                toast.present();
+              }
+
+            },
+              err => {
+                //this.navCtrl.setRoot(SideMenuPage);
+                const alert = this.alertCtrl.create({
+                  title: 'Alert',
+                  subTitle: 'Something went wrong ,Please try again!',
+                  buttons: ['OK']
+                });
+                alert.present();
+              }
+            );
         } else {
           const toast = this.toast.create({
-            message: this.result.Message,
+            message: data1.Message,
             duration: 2000
           });
           toast.present();
         }
-        //   // this.signInForm.reset();
-        //   //this.navCtrl.setRoot(SideMenuPage);
-        //   // this.storage.set('UserDetails', this.result.data);
-        //   // this.storage.set('token', this.result.token)
-        // } else {
-        //   alert(this.result.message);
-        // }
-      },
-        err => {
-          //this.navCtrl.setRoot(SideMenuPage);
-          const alert = this.alertCtrl.create({
-            title: 'Alert',
-            subTitle: 'Something went wrong ,Please try again!',
-            buttons: ['OK']
-          });
-          alert.present();
-        }
-      );
+      }, (err) => {
+        const toast = this.toast.create({
+          message: 'Network Error',
+          duration: 2000
+        });
+        toast.present();
+      })
   }
   newAcoount() {
     //this.navCtrl.setRoot('SignupPage')
   }
 
   closeModal() {
-    this.navCtrl.pop();
+    this.nav.pop();
   }
 }

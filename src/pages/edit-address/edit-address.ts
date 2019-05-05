@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, RequestOptions, Headers } from '@angular/http';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Global } from '../../Global';
+import { ManageAddressPage } from '../manage-address/manage-address';
 
 /**
  * Generated class for the EditAddressPage page.
@@ -14,44 +17,63 @@ import { Http, RequestOptions, Headers } from '@angular/http';
   selector: 'page-edit-address',
   templateUrl: 'edit-address.html',
 })
-export class EditAddressPage {
-  addresses = [];
+export class EditAddressPage { 
+  editAddressForm:FormGroup;
+  editAddressFormData:any;
+  addresses: any;
+  mobile: number;
+  userId: any;
+  addId: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private formBuilder: FormBuilder,
     private http: Http
+  ) { 
 
-  ) {
-  }
+  this.editAddressForm = this.formBuilder.group({
+    full_name: ['',[Validators.required,Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'),Validators.minLength(6), Validators.maxLength(30)]],      
+    full_address : ['',[Validators.required,Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'),Validators.minLength(6), Validators.maxLength(150)]],
+    city: ['', [Validators.required,Validators.minLength(6), Validators.maxLength(20)]],
+    pincode: ['',[Validators.required,Validators.minLength(5), Validators.maxLength(6)]],
+  });
+}
   ngOnInit() {
-    let mno = '9700443084';
-    this.http.get('http://localhost:3000/customer/myProfile/' + mno).subscribe(
+    this.userId=localStorage.getItem('userId');
+    this.addId = localStorage.getItem('addId')
+    console.log("This is userId: "+JSON.stringify(this.addId))    
+    this.http.get(`${Global.url}customeraddress/`+this.userId+"/"+this.addId).subscribe(
       getData => {
-        var data = getData.json().response;
-        this.addresses.push(data);
-        console.log("this is Data: " + JSON.stringify(this.addresses[0].full_name))
+        //this.addresses = getData.json().response;
+        this.editAddressFormData = getData.json().response;         
+        console.log("this is Data:>>>" + JSON.stringify(this.editAddressFormData))        
+        this.editAddressFormData = getData.json().response[0];      
+        this.editAddressForm = this.formBuilder.group({
+          full_name: [this.editAddressFormData.full_name, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'),Validators.minLength(6), Validators.maxLength(30)]],
+          full_address: [this.editAddressFormData.full_address, [Validators.required,Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'),Validators.minLength(6), Validators.maxLength(150)]],
+          city: [this.editAddressFormData.city, [Validators.required,Validators.minLength(6), Validators.maxLength(20)]],
+          pincode: [this.editAddressFormData.pincode, [Validators.required,Validators.minLength(5), Validators.maxLength(6)]],
+        })
       })
   }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditAddressPage');
-  }
-  update(address) {
+
+  update() {
+    let obj = {
+      "full_name": "" + this.editAddressForm.value.full_name,
+      "full_address": "" + this.editAddressForm.value.full_address,
+      "city": "" + this.editAddressForm.value.city,
+      "pincode": "" + this.editAddressForm.value.pincode,
+    }
     var headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-    let obj = {
-      "full_name": address.full_name,
-      "full_address": address.full_address,
-      "city": address.city,
-      "addresstype": address.gender,
-      "zip": address.zip
-    }
-    alert("This is parameter: " + JSON.stringify(obj))
-    this.http.put('http://localhost:3000//customeraddress/' + address.id + '/'+address.userid,JSON.stringify(obj), options)
+    console.log("This is parameter: " + JSON.stringify(obj))
+    this.http.put(`${Global.url}customeraddress/`+ this.addId + '/'+this.userId,JSON.stringify(obj), options)
       .subscribe(data => {
         const data1 = data.json()
-        alert("This is Result: " + JSON.stringify(data1));
+        console.log("This is Result: " + JSON.stringify(data1));
+        this.navCtrl.push(ManageAddressPage)
       }, (err) => {
         alert(err)
       })

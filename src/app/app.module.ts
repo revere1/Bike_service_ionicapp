@@ -6,7 +6,8 @@ import { Toast } from '@ionic-native/toast/ngx';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { SigninPage } from '../pages/signin/signin';
+import { MyOrderPage } from '../pages/my-order/my-order';
+import { MyorderDetailsPage } from '../pages/myorder-details/myorder-details';
 import { LocationPage } from '../pages/location/location';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -31,12 +32,15 @@ import { ManageAddressPage } from '../pages/manage-address/manage-address';
 import { ReviewAddressPage } from '../pages/review-address/review-address';
 import { AddAddressPage } from '../pages/add-address/add-address';
 import { EditAddressPage } from '../pages/edit-address/edit-address';
+
+import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    SigninPage,
+    MyOrderPage,
     TabsPage,
     LocationPage,
     BikeServicePage,
@@ -50,6 +54,7 @@ import { EditAddressPage } from '../pages/edit-address/edit-address';
     AddAddressPage,
     EditAddressPage,
     ReviewAddressPage,
+    MyorderDetailsPage,
     OtpPage
   ],
   imports: [
@@ -63,7 +68,7 @@ import { EditAddressPage } from '../pages/edit-address/edit-address';
     MyApp,
     HomePage,
     ListPage,
-    SigninPage,
+    MyOrderPage,
     TabsPage,
     LocationPage,
     BikeServicePage,
@@ -77,6 +82,7 @@ import { EditAddressPage } from '../pages/edit-address/edit-address';
     ReviewAddressPage,
     AddAddressPage,
     EditAddressPage,
+    MyorderDetailsPage,
     OtpPage
     
   ],
@@ -88,7 +94,7 @@ import { EditAddressPage } from '../pages/edit-address/edit-address';
     Geolocation, 
     Network,
     Toast,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    SecureStorage,
     Connectivity, SpinnerProvider, GoogleMaps, GeocodingService
   ]
 })

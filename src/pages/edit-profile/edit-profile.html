@@ -14,64 +14,53 @@
 
 
 <ion-content padding>
-  <ion-card>
-      <ion-list *ngFor="let item of profile">
+    <form [formGroup]="editProfileForm">
+      <ion-list>
         <ion-item>
-          <ion-label floating>Your Full Name</ion-label>
-          <!-- <ion-icon name="person" item-right></ion-icon> -->
-          <ion-input type="text" [(ngModel)]="item.full_name"></ion-input>
+          <ion-label floating>Your Full Name</ion-label>         
+          <ion-input type="text" formControlName="full_name"></ion-input>
         </ion-item>
+        <div class="error">
+            <p *ngIf="editProfileForm.controls.full_name.hasError('required') && editProfileForm.controls.full_name.touched"> full name is required!</p>
+            <p *ngIf="editProfileForm.controls.full_name.hasError('pattern') && editProfileForm.controls.full_name.touched">only small and capital letters are allowed!</p>
+            <p *ngIf="editProfileForm.controls.full_name.hasError('minlength') && editProfileForm.controls.full_name.touched"> Minimum username length is 6!</p>
+            <p *ngIf="editProfileForm.controls.full_name.hasError('maxlength') && editProfileForm.controls.full_name.touched"> Maximum username length is 30!</p>
+          </div>
         <ion-item>
-          <ion-label floating>Your E-Mail ID </ion-label>
-          <!-- <ion-icon name="person" item-right></ion-icon> -->
-          <ion-input type="text" [(ngModel)]="item.email"></ion-input>
+          <ion-label floating>Your E-Mail ID </ion-label>         
+          <!-- <ion-input type="email"[(ngModel)]="item.email"></ion-input> -->
+          <ion-input type="text" formControlName="email"></ion-input>
         </ion-item>
+        <div class="error">
+          <p *ngIf="editProfileForm.controls.email.hasError('required') && editProfileForm.controls.email.touched"> Email is required!</p>
+          <p *ngIf="editProfileForm.controls.email.hasError('email') && editProfileForm.controls.email.touched">Enter valid email!</p>
+        </div>
         <ion-item>
-          <ion-label floating>Your Mobile Number</ion-label>
-          <!-- <ion-icon name="person" item-right></ion-icon> -->
-          <ion-input type="number" [(ngModel)]="item.mobile_number"></ion-input>
+          <ion-label floating>Your Mobile Number</ion-label>      
+          <ion-input type="number" formControlName="mobile_number"></ion-input>
         </ion-item>
+        <div class="error">
+            <p *ngIf="editProfileForm.controls.mobile_number.hasError('required') && editProfileForm.controls.mobile_number.touched">mobile number is required!</p>
+            <p *ngIf="editProfileForm.controls.mobile_number.hasError('minlength') && editProfileForm.controls.mobile_number.touched">minimum mobile number length is 10!</p>
+            <p *ngIf="editProfileForm.controls.mobile_number.hasError('maxlength') && editProfileForm.controls.mobile_number.touched"> maximum mobile number length is 12!</p>
+          </div> 
         <ion-item>
-          <ion-label floating>Full Address</ion-label>
-          <!-- <ion-icon name="person" item-right></ion-icon> -->
-          <ion-input type="text" [(ngModel)]="item.full_address"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Zip Code</ion-label>
-          <!-- <ion-icon name="person" item-right></ion-icon> -->
-          <ion-input type="number" [(ngModel)]="item.zip"></ion-input>
-        </ion-item>
-        <!-- <div class="error">
-              <p *ngIf="signInForm.controls.user_name.hasError('email') && signInForm.controls.user_name.touched">Enter valid email!</p>
-            </div> -->
-
-        <ion-item>
-          <ion-label floating>Your Date Of Birth</ion-label>
-          <!-- <ion-icon name="person" item-right></ion-icon> -->
-          <ion-input type="date" [(ngModel)]="item.dob"></ion-input>
+          <ion-label floating>Your Date Of Birth</ion-label>       
+          <ion-input type="date" formControlName="dob"></ion-input>
         </ion-item>
         <ion-label>Gender</ion-label>
-        <ion-list radio-group [(ngModel)]="item.gender">
+        <ion-list radio-group formControlName="gender">
           <ion-item>
             <ion-label>Male</ion-label>
-            <ion-radio value="Male" checked></ion-radio>
+            <ion-radio  value="Male"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>Female</ion-label>
-            <ion-radio value="Female"></ion-radio>
+            <ion-radio  value="Female"></ion-radio>
           </ion-item>
-          <button ion-button color="orange" full (click)="update(item)">Update Profile</button>
-        </ion-list>
-        <!-- <div class="error">
-              <p *ngIf="signInForm.controls.password.hasError('required') && signInForm.controls.password.touched">Password is required!</p>
-              <p *ngIf="signInForm.controls.password.hasError('minlength') && signInForm.controls.password.touched">Minimum password length is 8!</p>
-            </div> -->
-
-        <!-- <button ion-button  color="orange" round>Update Profile</button> -->
+          <button ion-button color="orange" full (click)="submit()" [disabled]="!editProfileForm.valid">Update Profile</button>
+        </ion-list>   
         <br>
       </ion-list>
-  </ion-card>
+    </form>
 </ion-content>
-<ion-footer>
-  
-</ion-footer>

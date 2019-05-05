@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, App } from 'ionic-angular';
-import { SigninPage } from '../signin/signin';
+import { MyOrderPage } from '../my-order/my-order';
 import { LocationPage } from '../location/location';
 import { BikeServicePage } from '../bike-service/bike-service';
 
@@ -17,7 +17,7 @@ export class HomePage {
     this.navCtrl.push(LocationPage)
   }
   signin(){
-    this.navCtrl.setRoot(SigninPage);
+    this.navCtrl.setRoot(MyOrderPage);
   }
   bike(){
     this.app.getRootNav().push(BikeServicePage)
