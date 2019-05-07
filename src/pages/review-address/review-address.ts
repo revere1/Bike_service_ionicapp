@@ -5,6 +5,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
 import { MyOrderPage } from '../my-order/my-order';
 import { TabsPage } from '../tabs/tabs';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the ReviewAddressPage page.
@@ -123,7 +124,7 @@ export class ReviewAddressPage {
                 });
                 toast.present();
                 this.nav.pop();
-                this.appCtrl.getRootNav().setRoot(TabsPage);
+                this.appCtrl.getRootNav().setRoot(HomePage);
               } else {
                 const toast = this.toast.create({
                   message: this.result.Message,

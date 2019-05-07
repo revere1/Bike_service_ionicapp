@@ -1,4 +1,13 @@
 page-login {
+    .ion-back{
+        // background: #f8631a !important
+         background-image: url('../assets/imgs/login5.jpg');
+        
+
+    }   
+    .bg-color{
+        background: #ffffff !important 
+    }
 
     .item-icon img{
         height: 30px;
@@ -30,12 +39,12 @@ page-login {
         top :15px !important;
         background-size: 25px;
     }
-    .toolbar-background {
-        background-image: url('../../assets/imgs/rbg.png')!important;
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-    }
+    // .toolbar-background {
+    //     background-image: url('../../assets/imgs/rbg.png')!important;
+    //     background-size: cover;
+    //     background-position: center center;
+    //     background-repeat: no-repeat;
+    // }
     .toolbar-title-md {
         padding: 0 12px;
         font-size: 1.5rem;
@@ -156,5 +165,11 @@ page-login {
     .no-scroll .scroll-content{
         overflow: hidden;
     }
+//     .myview {
+ 
     
+//     background-image: url('assets/imgs/loginImage.jpg');}
+// //        .background-image {
+// //     background: url('assets/imgs/loginImage.jpg') no-repeat 100% 100%;
+// //   }
 }

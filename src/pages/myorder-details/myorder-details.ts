@@ -62,7 +62,7 @@ export class MyorderDetailsPage {
           duration: 2000
         });
         toast.present();
-        this.navCtrl.setRoot(MyOrderPage)
+          this.navCtrl.setRoot(MyOrderPage)
       }
       })
   }
