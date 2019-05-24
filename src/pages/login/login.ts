@@ -4,7 +4,8 @@ import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
 import { OtpPage } from '../otp/otp';
-import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
+// import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
+// import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
 import { HomePage } from '../home/home';
 
 /**
@@ -28,7 +29,7 @@ export class LoginPage {
     private formBuilder: FormBuilder,
     public navParams: NavParams,
     private toast: ToastController,
-    private secureStorage: SecureStorage
+    // private secureStorage: SecureStorage
   ) {
     this.signInForm = this.formBuilder.group({   
       mobile_number: ['', [Validators.required,Validators.minLength(10), Validators.maxLength(12)]],

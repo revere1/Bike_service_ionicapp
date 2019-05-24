@@ -33,7 +33,7 @@ import { ReviewAddressPage } from '../pages/review-address/review-address';
 import { AddAddressPage } from '../pages/add-address/add-address';
 import { EditAddressPage } from '../pages/edit-address/edit-address';
 
-import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
+// import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
 
 @NgModule({
   declarations: [
@@ -94,7 +94,7 @@ import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage
     Geolocation, 
     Network,
     Toast,
-    SecureStorage,
+    // SecureStorage,
     Connectivity, SpinnerProvider, GoogleMaps, GeocodingService
   ]
 })

@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="hee">
+  <ion-navbar color="danger">
     <ion-title>Edit Profile</ion-title>
   </ion-navbar>
 
@@ -44,20 +44,6 @@
             <p *ngIf="editProfileForm.controls.mobile_number.hasError('minlength') && editProfileForm.controls.mobile_number.touched">minimum mobile number length is 10!</p>
             <p *ngIf="editProfileForm.controls.mobile_number.hasError('maxlength') && editProfileForm.controls.mobile_number.touched"> maximum mobile number length is 12!</p>
           </div> 
-        <ion-item>
-          <ion-label floating>Your Date Of Birth</ion-label>       
-          <ion-input type="date" formControlName="dob"></ion-input>
-        </ion-item>
-        <!-- <ion-label>Gender</ion-label>
-        <ion-list radio-group formControlName="gender">
-          <ion-item>
-            <ion-label>Male</ion-label>
-            <ion-radio  value="Male"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>Female</ion-label>
-            <ion-radio  value="Female"></ion-radio>
-          </ion-item> -->
           <button ion-button color="orange" full (click)="submit()" [disabled]="!editProfileForm.valid">Update Profile</button>
         <!-- </ion-list>-->
         <br>

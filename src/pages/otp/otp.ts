@@ -50,7 +50,6 @@ export class OtpPage {
           });
           toast.present();
           localStorage.setItem('otp', JSON.stringify(result.Messages));
-          console
           localStorage.setItem('userId', JSON.stringify(result.payLoad.id_user))
           if(!result.payLoad.full_name){
             console.log("This is Resulrr: "+result.full_name)

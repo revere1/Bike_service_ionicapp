@@ -5,19 +5,19 @@
   Ionic pages and navigation.
 -->
 <!-- padding class="background" -->
-<ion-header style="color:blue">
-    <ion-navbar no-border-bottom>
-      <ion-title style="color:white">
+<ion-header >
+    <ion-navbar color="danger" no-border-bottom>
+      <ion-title style="color:white;text-align: center">
         My orders
       </ion-title>
     </ion-navbar>
-    <ion-toolbar no-border-top>
+    <!-- <ion-toolbar no-border-top  color="danger">
       <ion-segment>
         <ion-segment-button>
           Services
         </ion-segment-button>
       </ion-segment>
-    </ion-toolbar>
+    </ion-toolbar> -->
     <ion-toolbar no-border-top>
       <ion-segment [(ngModel)]="pet">
         <ion-segment-button value="order">
