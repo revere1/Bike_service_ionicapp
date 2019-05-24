@@ -52,28 +52,20 @@ export class ReviewAddressPage {
     });
   }
 
-  ngOnInit() {
-    this.getProfileData();
-    this.viewAddress();
-
-  }
-  getProfileData() {
-    const x = localStorage.getItem('mobile');
-    const mno = Number(x);
-    this.http.get(Global.url + 'customer/myProfile/' + mno).subscribe(
-      getData => {
-        this.data = getData.json().response;
-        localStorage.setItem('id', JSON.stringify(this.data.id_user))
-        this.package.push(this.data);
-      })
-  }
-  viewAddress() {
+  async ngOnInit() {
     this.userId = localStorage.getItem('userId');
-    this.addId = localStorage.getItem('addId')
-    this.http.get(`${Global.url}customeraddress/` + this.userId + "/" + this.addId).subscribe(
+    this.addId = localStorage.getItem('addId');
+    console.log("This is userId and addId:", this.userId, this.addId);
+    await this.viewAddress(localStorage.getItem('userId'),localStorage.getItem('addId'));
+    await this.getProfileData();
+  }
+   async viewAddress(a, b) {
+    console.log("This is userId and addId:viewAddress", a, b);
+     await this.http.get(`${Global.url}customeraddress/` + a + "/" + b).subscribe(
       getData => {
         this.editAddressFormData = getData.json().response[0];
-        this.editAddressForm = this.formBuilder.group({
+        console.log("This is Profile Data:", this.editAddressFormData)
+          this.editAddressForm = this.formBuilder.group({
           full_name: [this.editAddressFormData.full_name, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(30)]],
           full_address: [this.editAddressFormData.full_address, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(150)]],
           city: [this.editAddressFormData.city, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
@@ -81,7 +73,20 @@ export class ReviewAddressPage {
         })
       })
   }
-  confirmIn() {
+
+  async getProfileData() {
+    const x = localStorage.getItem('mobile');
+    const mno = Number(x);
+    await this.http.get(Global.url + 'customer/myProfile/' + mno).subscribe(
+      getData => {
+        this.data = getData.json().response;
+        console.log("This is Profile Data:", this.data)
+        localStorage.setItem('id', JSON.stringify(this.data.id_user))
+        this.package.push(this.data);
+      })
+  }
+
+  async confirmIn() {
     const headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json');
@@ -96,7 +101,7 @@ export class ReviewAddressPage {
       "time_slot": this.timeSlot,
       "status": "Active"
     }
-    this.http.post(Global.url + 'customerbookings/', obj, options)
+    await this.http.post(Global.url + 'customerbookings/', obj, options)
       .subscribe(data => {
         const data1 = data.json()
         if (data1.status === 201) {
@@ -113,13 +118,14 @@ export class ReviewAddressPage {
             "id_user": this.editAddressFormData.id_user,
             "status": "Active"
           }
-          this.http.post(`${Global.url}customeraddress` + "/" + 'create', obj)
+           this.http.post(`${Global.url}customeraddress` + "/" + 'create', obj)
             .subscribe(data => {
-              this.result = JSON.parse(data["_body"])
+              this.result = JSON.parse(data["_body"]);
+              console.log("This is confirmation:", this.result)
               if (this.result.status === 201) {
                 const toast = this.toast.create({
                   message: 'Your Booking Order Confirmation Succeessfully.',
-                  duration: 4000
+                  duration: 2000
                 });
                 toast.present();
                 this.nav.pop();
@@ -134,13 +140,11 @@ export class ReviewAddressPage {
 
             },
               err => {
-                //this.navCtrl.setRoot(SideMenuPage);
-                const alert = this.alertCtrl.create({
-                  title: 'Alert',
-                  subTitle: 'Something went wrong ,Please try again!',
-                  buttons: ['OK']
+                const toast = this.toast.create({
+                  message: 'Something went wrong ,Please try again!',
+                  duration: 2000
                 });
-                alert.present();
+                toast.present();
               }
             );
         } else {

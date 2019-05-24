@@ -49,13 +49,14 @@ export class OtpPage {
             duration: 2000
           });
           toast.present();
-          localStorage.setItem('otp', JSON.stringify(result.Messages))
+          localStorage.setItem('otp', JSON.stringify(result.Messages));
+          console
           localStorage.setItem('userId', JSON.stringify(result.payLoad.id_user))
           if(!result.payLoad.full_name){
             console.log("This is Resulrr: "+result.full_name)
           this.navCtrl.setRoot(EditProfilePage);
         } else {
-          this.navCtrl.setRoot(TabsPage)
+          this.navCtrl.setRoot(TabsPage, {userId: result.payLoad.id_user})
         }
         } else {
           const toast = this.toast.create({

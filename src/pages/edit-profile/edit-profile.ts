@@ -34,7 +34,7 @@ export class EditProfilePage {
         email : ['',[Validators.email]],
         mobile_number: ['', [Validators.required,Validators.minLength(10), Validators.maxLength(12)]],
         dob: ['',[Validators.required]],
-        gender: [[Validators.required]]
+        // gender: [[Validators.required]]
       });
   }
   ngOnInit(){
@@ -48,7 +48,7 @@ export class EditProfilePage {
           email: [this.editProfileFormData.email, [Validators.email]],
           mobile_number: [this.editProfileFormData.mobile_number, [Validators.required,Validators.minLength(10), Validators.maxLength(12)]],
           dob: [this.editProfileFormData.dob, [Validators.required]],
-          gender: [this.editProfileFormData.gender, [Validators.required]],
+          // gender: [this.editProfileFormData.gender, [Validators.required]],
         })
       })
   }
@@ -59,7 +59,7 @@ export class EditProfilePage {
       "email": "" + this.editProfileForm.value.email,
       "mobile_number": "" + this.editProfileForm.value.mobile_number,
       "dob": "" + this.editProfileForm.value.dob,
-      "gender":""+ this.editProfileForm.value.gender
+      // "gender":""+ this.editProfileForm.value.gender
     }
     const headers = new Headers();
     headers.append("Accept", 'application/json');

@@ -48,7 +48,7 @@
           <ion-label floating>Your Date Of Birth</ion-label>       
           <ion-input type="date" formControlName="dob"></ion-input>
         </ion-item>
-        <ion-label>Gender</ion-label>
+        <!-- <ion-label>Gender</ion-label>
         <ion-list radio-group formControlName="gender">
           <ion-item>
             <ion-label>Male</ion-label>
@@ -57,9 +57,9 @@
           <ion-item>
             <ion-label>Female</ion-label>
             <ion-radio  value="Female"></ion-radio>
-          </ion-item>
+          </ion-item> -->
           <button ion-button color="orange" full (click)="submit()" [disabled]="!editProfileForm.valid">Update Profile</button>
-        </ion-list>   
+        <!-- </ion-list>-->
         <br>
       </ion-list>
     </form>
