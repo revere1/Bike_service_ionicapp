@@ -49,8 +49,7 @@ export class OtpPage {
             duration: 2000
           });
           toast.present();
-          localStorage.setItem('otp', JSON.stringify(result.Messages));
-          localStorage.setItem('userId', JSON.stringify(result.payLoad.id_user))
+          Global.userId = result.payLoad.id_user;
           if(!result.payLoad.full_name){
             console.log("This is Resulrr: "+result.full_name)
           this.navCtrl.setRoot(EditProfilePage);

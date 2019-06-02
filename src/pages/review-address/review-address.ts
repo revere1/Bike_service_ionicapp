@@ -54,27 +54,11 @@ export class ReviewAddressPage {
   }
 
   async ngOnInit() {
-    this.userId = localStorage.getItem('userId');
-    this.addId = localStorage.getItem('addId');
-    console.log("This is userId and addId:", this.userId, this.addId);
-    await this.viewAddress(localStorage.getItem('userId'),localStorage.getItem('addId'));
+    // this.userId = localStorage.getItem('userId');
+    console.log("This is userId and addId:", Global.userId, Global.addId);
+    await this.viewAddress(Global.userId, Global.addId);
     await this.getProfileData();
   }
-   async viewAddress(a, b) {
-    console.log("This is userId and addId:viewAddress", a, b);
-     await this.http.get(`${Global.url}customeraddress/` + a + "/" + b).subscribe(
-      getData => {
-        this.editAddressFormData = getData.json().response[0];
-        console.log("This is Profile Data:", this.editAddressFormData)
-          this.editAddressForm = this.formBuilder.group({
-          full_name: [this.editAddressFormData.full_name, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(30)]],
-          full_address: [this.editAddressFormData.full_address, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(150)]],
-          city: [this.editAddressFormData.city, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-          pincode: [this.editAddressFormData.pincode, [Validators.required, Validators.minLength(5), Validators.maxLength(6)]],
-        })
-      })
-  }
-
   async getProfileData() {
     const x = localStorage.getItem('mobile');
     const mno = Number(x);
@@ -86,8 +70,23 @@ export class ReviewAddressPage {
         this.package.push(this.data);
       })
   }
+  async viewAddress(a, b) {
+    console.log("This is userId and addId:viewAddress", a, b);
+    await this.http.get(`${Global.url}customeraddress/` + a + "/" + b).subscribe(
+      getData => {
+        this.editAddressFormData = getData.json().response[0];
+        console.log("This is Profile Data:", this.editAddressFormData)
+        this.editAddressForm = this.formBuilder.group({
+          full_name: [this.data.full_name, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(30)]],
+          full_address: [this.editAddressFormData.full_address, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(150)]],
+          city: [this.editAddressFormData.city, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+          pincode: [this.editAddressFormData.pincode, [Validators.required, Validators.minLength(5), Validators.maxLength(6)]],
+        })
+      })
+  }
 
-  async confirmIn() {
+
+  confirmIn() {
     const headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json');
@@ -102,7 +101,7 @@ export class ReviewAddressPage {
       "time_slot": this.timeSlot,
       "status": "Active"
     }
-    await this.http.post(Global.url + 'customerbookings/', obj, options)
+    this.http.post(Global.url + 'customerbookings/', obj, options)
       .subscribe(data => {
         const data1 = data.json()
         if (data1.status === 201) {
@@ -111,6 +110,7 @@ export class ReviewAddressPage {
             duration: 2000
           });
           toast.present();
+          this.nav.setRoot(TabsPage);
           let obj = {
             "full_name": "" + this.editAddressForm.value.full_name,
             "full_address": "" + this.editAddressForm.value.full_address,
@@ -119,26 +119,19 @@ export class ReviewAddressPage {
             "id_user": this.editAddressFormData.id_user,
             "status": "Active"
           }
-           this.http.post(`${Global.url}customeraddress` + "/" + 'create', obj)
+          this.http.post(`${Global.url}customeraddress` + "/" + 'create', obj)
             .subscribe(data => {
               this.result = JSON.parse(data["_body"]);
               console.log("This is confirmation:", this.result)
               if (this.result.status === 201) {
-                const toast = this.toast.create({
-                  message: 'Your Booking Order Confirmation Succeessfully.',
-                  duration: 2000
-                });
-                toast.present();
-                this.nav.pop();
-                this.appCtrl.getRootNav().setRoot(HomePage);
-              } else {
                 const toast = this.toast.create({
                   message: this.result.Message,
                   duration: 2000
                 });
                 toast.present();
               }
-
+              this.nav.setRoot(TabsPage);
+              // this.nav.pop();
             },
               err => {
                 const toast = this.toast.create({

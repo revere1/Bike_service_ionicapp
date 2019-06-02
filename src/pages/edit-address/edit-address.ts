@@ -39,10 +39,9 @@ export class EditAddressPage {
   });
 }
   ngOnInit() {
-    this.userId=localStorage.getItem('userId');
-    this.addId = localStorage.getItem('addId')
+    this.userId=Global.userId;
     console.log("This is userId: "+JSON.stringify(this.addId))    
-    this.http.get(`${Global.url}customeraddress/`+this.userId+"/"+this.addId).subscribe(
+    this.http.get(`${Global.url}customeraddress/`+this.userId+"/"+Global.addId).subscribe(
       getData => {
         //this.addresses = getData.json().response;
         this.editAddressFormData = getData.json().response;         
@@ -69,7 +68,7 @@ export class EditAddressPage {
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
     console.log("This is parameter: " + JSON.stringify(obj))
-    this.http.put(`${Global.url}customeraddress/`+ this.addId + '/'+this.userId,JSON.stringify(obj), options)
+    this.http.put(`${Global.url}customeraddress/`+ Global.addId + '/'+this.userId,JSON.stringify(obj), options)
       .subscribe(data => {
         const data1 = data.json()
         console.log("This is Result: " + JSON.stringify(data1));

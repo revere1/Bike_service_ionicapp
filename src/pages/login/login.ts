@@ -36,26 +36,17 @@ export class LoginPage {
     });
   }
   signIn() {
-    // Global.mobileNumber = this.signInForm.get('mobile_number').value;
-    // this.secureStorage.create('mobNum')
-    // .then((storage: SecureStorageObject) => {
-    //   storage.set('mobNum', Global.mobileNumber)
-    //   .then(
-    //     data => console.log(data),
-    //     error => console.log(error)
-    //     );
-    //   });
     localStorage.setItem('mobile', JSON.parse(this.signInForm.get('mobile_number').value))
     this.http.get(`${Global.url}customer/login/` + this.signInForm.get('mobile_number').value)
       .subscribe(data => {
         const result = data.json()
         if (result.status === 200) {
           if (result.Messages === undefined) {
-            const toast = this.toast.create({
-              message: `This is OTP:${result.Messages}`,
-              duration: 2000
-            });
-            toast.present();
+            // const toast = this.toast.create({
+            //   message: `This is OTP:${result.Messages}`,
+            //   duration: 2000
+            // });
+            // toast.present();
           } else {
             const toast = this.toast.create({
               message: `This is OTP:${result.Messages}`,

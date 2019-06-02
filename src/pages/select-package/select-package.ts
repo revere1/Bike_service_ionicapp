@@ -15,6 +15,7 @@ import { BookNowPage } from '../book-now/book-now';
   templateUrl: 'select-package.html',
 })
 export class SelectPackagePage {
+  Rupees: any;
   sName: any;
   dSlot: any;
   tSlot: any;
@@ -22,10 +23,20 @@ export class SelectPackagePage {
     this.sName = this.navParams.get('sName');
     this.dSlot = this.navParams.get('dSlot');
     this.tSlot = this.navParams.get('tSlot');
-    console.log("This is bookNavParams: "+this.sName, this.dSlot, this.tSlot)
+    console.log("This is bookNavParams: " + this.sName, this.dSlot, this.tSlot);
+    if(this.sName === "Upto 100CC") {
+      this.Rupees = 350;
+      console.log(this.Rupees)
+    } else if(this.sName === "More than 150CC") {
+      this.Rupees = 450;
+      console.log(this.Rupees)
+    } else if(this.sName === "Royal Enfield") {
+      this.Rupees = 550;
+      console.log(this.Rupees)
+    }
   }
-  viewSP(){
-    console.log("This is bookNavParams: "+this.sName, this.dSlot, this.tSlot)
-    this.navCtrl.push(BookNowPage,{serName: this.sName, daySlot: this.dSlot, timeSlot: this.tSlot})
+  viewSP() {
+    console.log("This is bookNavParams: " + this.sName, this.dSlot, this.tSlot)
+    this.navCtrl.push(BookNowPage, { serName: this.sName, daySlot: this.dSlot, timeSlot: this.tSlot, cost: this.Rupees })
   }
 }

@@ -33,7 +33,7 @@ export class EditProfilePage {
         full_name: ['',[Validators.required,Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'),Validators.minLength(6), Validators.maxLength(30)]],      
         email : ['',[Validators.email]],
         mobile_number: ['', [Validators.required,Validators.minLength(10), Validators.maxLength(12)]],
-        dob: ['',[Validators.required]],
+        // dob: ['',[Validators.required]],
         // gender: [[Validators.required]]
       });
   }
@@ -47,7 +47,7 @@ export class EditProfilePage {
           full_name: [this.editProfileFormData.full_name, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'),Validators.minLength(6), Validators.maxLength(30)]],
           email: [this.editProfileFormData.email, [Validators.email]],
           mobile_number: [this.editProfileFormData.mobile_number, [Validators.required,Validators.minLength(10), Validators.maxLength(12)]],
-          dob: [this.editProfileFormData.dob, [Validators.required]],
+          // dob: [this.editProfileFormData.dob, [Validators.required]],
           // gender: [this.editProfileFormData.gender, [Validators.required]],
         })
       })

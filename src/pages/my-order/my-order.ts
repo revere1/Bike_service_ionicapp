@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Global } from '../../Global';
 import { MyorderDetailsPage } from '../myorder-details/myorder-details';
+import moment from 'moment';
 
 /**
  * Generated class for the MyOrderPage page.
@@ -25,6 +26,8 @@ export class MyOrderPage {
   pet: string = "order";
   list: string = "list1";
   myorders: any;
+  kesava: any;
+  Rupees: any;
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
     public http: Http,
@@ -35,15 +38,22 @@ export class MyOrderPage {
   }
 
   ngOnInit(){
+    this.Rupees = Global.Rupees;
+    console.log("This is Rupees:", this.Rupees);
     this.order();
   }
   order(){
-    const userId = localStorage.getItem('userId');
+    const userId = Global.userId;
     console.log('orderuser',userId);
     this.http.get(`${Global.url}customerbookings/`+userId).subscribe(
       getData =>{
         this.myorders = getData.json().result;
-        console.log('orderuser result: ',this.myorders);
+        console.log('>>>>bbbbbbb',this.myorders)
+        console.log('orderuser result length: ',this.myorders.length);
+        // for(let i=0; i<this.myorders.length; i++) {
+           //this.kesava = moment(this.myorders.day_slot).format("Do MMM, YYYY"); 
+           console.log(this.kesava);
+          //}
         if (this.myorders.length === 0 || this.myorders === 'no records found') {
           this.myOrderData = true;
           return false;

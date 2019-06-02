@@ -21,6 +21,7 @@ export class BookNowPage {
 serviceName: any;
 daySlot: any;
 timeSlot: any;
+Rupees: any;
   constructor(private modalController:ModalController,
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -28,6 +29,9 @@ timeSlot: any;
       this.serviceName = this.navParams.get('serName');
       this.daySlot = this.navParams.get('daySlot');
       this.timeSlot = this.navParams.get('timeSlot');
+      this.Rupees = this.navParams.get('cost');
+      Global.Rupees = this.Rupees;
+      console.log("This is Rupess:", Global.Rupees)
   }
 
   openFilterModal(){

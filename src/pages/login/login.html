@@ -1,48 +1,8 @@
-<!--
-  Generated template for the LoginPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<!-- <ion-header style="color:blue">
-   <ion-navbar color="hee"> 
-<ion-row>
-        <ion-col (click)="loc()">
-          <ion-icon ios="ios-locate" md="md-locate" style="color: white"></ion-icon>
-          <b style="color: white">Choose Your Location</b>
-        </ion-col>
-      </ion-row>
-      <ion-searchbar>
-      </ion-searchbar>
- </ion-navbar>
-  </ion-header> -->
-<ion-header>
-
-  <ion-navbar color="danger">
-    <ion-title></ion-title>
-  </ion-navbar>
-
-</ion-header>
-<ion-content disable-scroll class="ion-back">
-  <!-- <b style="background-image: url('assets/imgs/loginImage.jpg');"></b> -->
-  <!-- <img src="assets/imgs/loginImage.jpg" class="img-position" style="height:14em; width: 24em">style="height:10em; width: 15em; margin-top:2em "> -->
-  <!-- <img src="assets/imgs/login3.jpg" class="img-position"> -->
-  <!-- <ion-card> -->
+<ion-content disable-scroll>
+    <img src="../../assets/imgs/bike1.jpg" class="img-position">
   <form [formGroup]="signInForm" (ngSubmit)="signIn()">
-    <!-- <ion-list> -->
-    <!-- <ion-item >    -->
-    <!-- <h4><b>Enter Your Mobile Number:</b></h4> -->
     <br>
-        <!-- </ion-card> -->
-    <ion-input type="number" placeholder="Enter Your Mobile Number" formControlName="mobile_number"
-      style="color:#ffffff" style="height: 3em;margin-left:1em; width: 23em;text-align:3px;border: 2px solid white"></ion-input>
-    <!-- <h4><b>Last Name:</b></h4><h4><b>First Name:</b></h4>
-            <ion-input type="text" placeholder="Enter First Name"
-              style="height: 3em; width: 23em;text-align:3px;border: 2px solid lightblue"></ion-input> -->
-
-    <!-- <ion-label floating>+91-Enter Your Mobile Number</ion-label> -->
-    <!-- <ion-input type="number" formControlName="mobile_number" maxlength="10" style="opacity:0.7;border-radius:25px !important;"></ion-input> -->
-    <!-- </ion-item> -->
+    <ion-input class="center" style="color: black;" type="number" placeholder="Enter Your Mobile Number" formControlName="mobile_number"></ion-input>
     <div class="error">
       <p *ngIf="signInForm.controls.mobile_number.hasError('required') && signInForm.controls.mobile_number.touched">
         mobile number is required!</p>
@@ -51,9 +11,7 @@
       <p *ngIf="signInForm.controls.mobile_number.hasError('maxlength') && signInForm.controls.mobile_number.touched">
         maximum mobile number length is 12!</p>
     </div>
-    <button ion-button round color="white" [disabled]="!signInForm.valid">Login</button>
+    <button ion-button round color="blue" [disabled]="!signInForm.valid">Login</button>
     <br>
-    <!-- </ion-list> -->
   </form>
-  <!-- </ion-card> -->
 </ion-content>

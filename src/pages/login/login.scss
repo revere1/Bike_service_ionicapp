@@ -1,9 +1,10 @@
 page-login {
-    .ion-back{
-        // background: #f8631a !important
-         background-image: url('../assets/imgs/login5.jpg');
-        
+    ion-content.background{
+        --background: url(../../assets/imgs/login5.jpg) 0 0 100% 100% no-repeat;
+    }
 
+    .ion-back{
+         background-image: url('../assets/imgs/login5.jpg');
     }   
     .bg-color{
         background: #ffffff !important 
@@ -172,4 +173,11 @@ page-login {
 // //        .background-image {
 // //     background: url('assets/imgs/loginImage.jpg') no-repeat 100% 100%;
 // //   }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
 }

@@ -34,7 +34,7 @@ export class AddAddressPage {
         city: ['', [Validators.required,Validators.minLength(6), Validators.maxLength(20)]],
         pincode: ['',[Validators.required,Validators.minLength(5), Validators.maxLength(6)]],
       });
-      this.userId =localStorage.getItem('userId');
+      this.userId =Global.userId;
     }
 
     addAddress(){

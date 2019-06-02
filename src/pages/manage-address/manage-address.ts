@@ -33,9 +33,7 @@ export class ManageAddressPage {
     this.manageAddressList();
   }
   manageAddressList(){
-    const userId = localStorage.getItem('userId');
-    console.log('user',userId);
-    this.http.get(`${Global.url}customeraddress/`+userId).subscribe(
+    this.http.get(`${Global.url}customeraddress/`+Global.userId).subscribe(
       getData =>{
         this.manageAddress = getData.json().response;
         console.log('stat',this.manageAddress.status)
@@ -48,7 +46,7 @@ export class ManageAddressPage {
   viewEA(addressId){
     event.preventDefault();
     event.stopPropagation();
-    localStorage.setItem('addId', JSON.stringify(addressId))
+    Global.addId= addressId;
     this.navCtrl.push(EditAddressPage)
   }
   deleteAdd(addressId){
