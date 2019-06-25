@@ -34,10 +34,10 @@
           </ion-row>
         </ion-card-content>
       </ion-card>
-  <ion-card  *ngFor="let details of detailsArray">
+  <!-- <ion-card  *ngFor="let details of detailsArray">
       <ion-card-content>
         <ion-row no-padding>
-          <ion-col class="event-name">
+          <ion-col col-3 text-center>
             <b> Scope Auto works</b>
             <p class="day">
               Amount-Rs.499
@@ -59,28 +59,32 @@
         </ion-row>
       </ion-card-content>
       
-    </ion-card>
-    <ion-card>
+    </ion-card> -->
+
+    <ion-card *ngFor="let details of detailsArray">     
         <ion-card-content>
-          <ion-row no-padding>
-            <ion-col col-3 text-center>
-              <p class="month">
-                <img src="../../assets/imgs/2.jpg" />
-              </p>
-              <p class="day">
-                Rs.499
-              </p>
-            </ion-col>
+          <ion-row no-padding>      
             <ion-col class="event-name">
               <b> Scope Auto works</b>
-              Hyderabad,500018
-              <p class="event-location">
-                Bike Repair & Service, Breakdown
-                Assistance
+              <p class="day">
+                Amount-Rs.499
+               </p>
+              <p class="event-location">                 
+                {{details.service_name}}
               </p>
+            </ion-col>
+            <ion-col col-6 text-center>
+              <b> 
+                Booking ID:{{details.id_book_services}}
+              </b>            
+            </ion-col>          
+            <ion-col>
+              <p class="day">
+                   Schedule-{{details.day_slot}} | {{details.time_slot}}
+              </p> 
             </ion-col>
           </ion-row>
         </ion-card-content>
       </ion-card>
-      <button ion-button full (click)="cancelOrder()" *ngIf="status == 'Active'">Cancel Order</button>
+      <button ion-button round full (click)="cancelOrder()" *ngIf="status == 'Active'">Cancel Order</button>
 </ion-content>

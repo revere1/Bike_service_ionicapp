@@ -39,7 +39,6 @@ export class MyOrderPage {
 
   ngOnInit(){
     this.Rupees = Global.Rupees;
-    console.log("This is Rupees:", this.Rupees);
     this.order();
   }
   order(){
@@ -48,11 +47,9 @@ export class MyOrderPage {
     this.http.get(`${Global.url}customerbookings/`+userId).subscribe(
       getData =>{
         this.myorders = getData.json().result;
-        console.log('>>>>bbbbbbb',this.myorders)
-        console.log('orderuser result length: ',this.myorders.length);
         // for(let i=0; i<this.myorders.length; i++) {
            //this.kesava = moment(this.myorders.day_slot).format("Do MMM, YYYY"); 
-           console.log(this.kesava);
+          //  console.log(this.kesava);
           //}
         if (this.myorders.length === 0 || this.myorders === 'no records found') {
           this.myOrderData = true;

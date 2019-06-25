@@ -20,6 +20,6 @@ export class HomePage {
     this.navCtrl.setRoot(MyOrderPage);
   }
   bike(){
-    this.app.getRootNav().push(BikeServicePage)
+    this.navCtrl.push(BikeServicePage)
   }
 }
