@@ -31,6 +31,7 @@ export class ReviewAddressPage {
   timeSlot: any;
   userId: any;
   addId: any;
+  Rupees: any;
   editAddressFormData: any;
   constructor(
     public alertCtrl: AlertController,
@@ -45,6 +46,8 @@ export class ReviewAddressPage {
     this.serviceName = this.navParams.get('serName')
     this.daySlot = this.navParams.get('dSlot')
     this.timeSlot = this.navParams.get('tSlot')
+    Global.Rupees = this.navParams.get('cost');
+
     this.editAddressForm = this.formBuilder.group({
       full_name: ['', [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(30)]],
       full_address: ['', [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(150)]],

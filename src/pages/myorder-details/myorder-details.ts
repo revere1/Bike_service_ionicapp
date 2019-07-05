@@ -24,10 +24,12 @@ export class MyorderDetailsPage {
    details: any;
    detailsArray = [];
    status: any;
+   Rupees: any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private http: Http,
     private toast: ToastController) {
+    //  this.Rupees =Global.Rupees;
      this.bookId = this.navParams.get('bid')
      this.userId = this.navParams.get('uid')
      this.http.get(`${Global.url}customerbookings/details/${this.userId}/${this.bookId}`).subscribe(

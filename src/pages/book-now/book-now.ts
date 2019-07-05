@@ -36,7 +36,7 @@ Rupees: any;
 
   openFilterModal(){
     console.log('dayslot', this.daySlot)
-    let openFilterModal = this.modalController.create(ReviewAddressPage, {serName: this.serviceName, dSlot:this.daySlot, tSlot: this.timeSlot});
+    let openFilterModal = this.modalController.create(ReviewAddressPage, {serName: this.serviceName, dSlot:this.daySlot, tSlot: this.timeSlot, cost: this.Rupees});
     openFilterModal.present();
 
   }

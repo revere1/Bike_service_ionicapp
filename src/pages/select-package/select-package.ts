@@ -36,7 +36,6 @@ export class SelectPackagePage {
     }
   }
   viewSP() {
-    console.log("This is bookNavParams: " + this.sName, this.dSlot, this.tSlot)
     this.navCtrl.push(BookNowPage, { serName: this.sName, daySlot: this.dSlot, timeSlot: this.tSlot, cost: this.Rupees })
   }
 }

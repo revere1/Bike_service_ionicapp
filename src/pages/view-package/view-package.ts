@@ -26,10 +26,6 @@ export class ViewPackagePage {
     private http: Http,
     private toast: ToastController) {
   }
-  // 
-  ngOnInit() {
-
-  }
 
   viewP(a, b, c) {
     if (!a) {

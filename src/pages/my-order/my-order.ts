@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 
 import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -30,11 +30,13 @@ export class MyOrderPage {
   Rupees: any;
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
     public http: Http,
     private formBuilder: FormBuilder,
     public navParams: NavParams,
     private toast: ToastController
     ) {
+
   }
 
   ngOnInit(){
@@ -42,15 +44,20 @@ export class MyOrderPage {
     this.order();
   }
   order(){
+    let loadingPopup = this.loadingCtrl.create({
+      content: 'Loading data...',
+      duration: 3000
+    });
+
+     // Show the popup
+  loadingPopup.present()
     const userId = Global.userId;
-    console.log('orderuser',userId);
     this.http.get(`${Global.url}customerbookings/`+userId).subscribe(
       getData =>{
+        setTimeout(() => {
+          loadingPopup.dismiss();
+        }, 500);
         this.myorders = getData.json().result;
-        // for(let i=0; i<this.myorders.length; i++) {
-           //this.kesava = moment(this.myorders.day_slot).format("Do MMM, YYYY"); 
-          //  console.log(this.kesava);
-          //}
         if (this.myorders.length === 0 || this.myorders === 'no records found') {
           this.myOrderData = true;
           return false;
