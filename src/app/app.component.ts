@@ -6,8 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
-import { TabsPage } from '../pages/tabs/tabs';
+// import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+// import { Global } from '../Global';
 
 // import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
 
@@ -16,7 +17,7 @@ import { LoginPage } from '../pages/login/login';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  // rootPage: any;
   rootPage: any = LoginPage;
 
   pages: Array<{ title: string, component: any }>;
@@ -25,8 +26,14 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     // public secureStorage: SecureStorage
-    ) 
-    {
+    ) {
+    // {
+    //   Global.userId = localStorage.getItem('id_user');
+    //   if(Global.userId !== null){
+    //     this.rootPage = TabsPage;
+    //   } else {
+    //     this.rootPage = LoginPage;
+    //   }
     this.initializeApp();
 
     // used for an example of ngFor and navigation

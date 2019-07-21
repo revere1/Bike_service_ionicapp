@@ -40,12 +40,12 @@ export class EditAddressPage {
 }
   ngOnInit() {
     this.userId=Global.userId;
-    console.log("This is userId: "+JSON.stringify(this.addId))    
+    // console.log("This is userId: "+JSON.stringify(this.addId))    
     this.http.get(`${Global.url}customeraddress/`+this.userId+"/"+Global.addId).subscribe(
       getData => {
         //this.addresses = getData.json().response;
         this.editAddressFormData = getData.json().response;         
-        console.log("this is Data:>>>" + JSON.stringify(this.editAddressFormData))        
+        // console.log("this is Data:>>>" + JSON.stringify(this.editAddressFormData))        
         this.editAddressFormData = getData.json().response[0];      
         this.editAddressForm = this.formBuilder.group({
           full_name: [this.editAddressFormData.full_name, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'),Validators.minLength(6), Validators.maxLength(30)]],
@@ -67,11 +67,11 @@ export class EditAddressPage {
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-    console.log("This is parameter: " + JSON.stringify(obj))
+    // console.log("This is parameter: " + JSON.stringify(obj))
     this.http.put(`${Global.url}customeraddress/`+ Global.addId + '/'+this.userId,JSON.stringify(obj), options)
       .subscribe(data => {
         const data1 = data.json()
-        console.log("This is Result: " + JSON.stringify(data1));
+        // console.log("This is Result: " + JSON.stringify(data1));
         this.navCtrl.push(ManageAddressPage)
       }, (err) => {
         alert(err)

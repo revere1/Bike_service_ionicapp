@@ -23,16 +23,12 @@ export class SelectPackagePage {
     this.sName = this.navParams.get('sName');
     this.dSlot = this.navParams.get('dSlot');
     this.tSlot = this.navParams.get('tSlot');
-    console.log("This is bookNavParams: " + this.sName, this.dSlot, this.tSlot);
     if(this.sName === "Upto 100CC") {
       this.Rupees = 350;
-      console.log(this.Rupees)
     } else if(this.sName === "More than 150CC") {
       this.Rupees = 450;
-      console.log(this.Rupees)
     } else if(this.sName === "Royal Enfield") {
       this.Rupees = 550;
-      console.log(this.Rupees)
     }
   }
   viewSP() {

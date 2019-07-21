@@ -58,27 +58,29 @@ export class ReviewAddressPage {
 
   async ngOnInit() {
     // this.userId = localStorage.getItem('userId');
-    console.log("This is userId and addId:", Global.userId, Global.addId);
     await this.viewAddress(Global.userId, Global.addId);
     await this.getProfileData();
   }
+
+  async ionViewWillEnter(){
+    //calling an API
+    await this.viewAddress(Global.userId, Global.addId);
+    await this.getProfileData();
+    }
   async getProfileData() {
     const x = localStorage.getItem('mobile');
     const mno = Number(x);
     await this.http.get(Global.url + 'customer/myProfile/' + mno).subscribe(
       getData => {
         this.data = getData.json().response;
-        console.log("This is Profile Data:", this.data)
         localStorage.setItem('id', JSON.stringify(this.data.id_user))
         this.package.push(this.data);
       })
   }
   async viewAddress(a, b) {
-    console.log("This is userId and addId:viewAddress", a, b);
     await this.http.get(`${Global.url}customeraddress/` + a + "/" + b).subscribe(
       getData => {
         this.editAddressFormData = getData.json().response[0];
-        console.log("This is Profile Data:", this.editAddressFormData)
         this.editAddressForm = this.formBuilder.group({
           full_name: [this.data.full_name, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(30)]],
           full_address: [this.editAddressFormData.full_address, [Validators.required, Validators.pattern('[a-z]|[A-Z]|[0-9]|[ ]|[-]|[_][.]*'), Validators.minLength(6), Validators.maxLength(150)]],
@@ -125,7 +127,6 @@ export class ReviewAddressPage {
           this.http.post(`${Global.url}customeraddress` + "/" + 'create', obj)
             .subscribe(data => {
               this.result = JSON.parse(data["_body"]);
-              console.log("This is confirmation:", this.result)
               if (this.result.status === 201) {
                 const toast = this.toast.create({
                   message: this.result.Message,

@@ -20,9 +20,6 @@ export class MyprofilePage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MyprofilePage');
-  }
   viewEP(){
     this.navCtrl.push(EditProfilePage)
   }

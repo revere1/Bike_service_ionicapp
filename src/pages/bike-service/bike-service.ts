@@ -19,11 +19,8 @@ export class BikeServicePage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BikeServicePage');
-  }
   viewPP(){
-    console.log("This is ")
+    // console.log("This is ")
     this.navCtrl.push(ViewPackagePage)
   }
 

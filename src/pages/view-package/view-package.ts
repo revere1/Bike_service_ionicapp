@@ -43,13 +43,11 @@ export class ViewPackagePage {
     }
     else if (b === 'Today') {
       b = new Date().toISOString().slice(0, 10);
-      console.log("This is date: " + b)
     }
     else if (b === 'Tomorrow') {
       b = new Date();
       b = new Date(b.getTime() + (1000 * 60 * 60 * 24));
       b = b.toISOString().slice(0, 10);
-      console.log("This is date tomorrow1: " + a, b, c)
     }
     if (!c) {
       const toast = this.toast.create({

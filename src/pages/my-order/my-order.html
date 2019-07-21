@@ -64,7 +64,7 @@
                 <ion-item no-lines padding>
                     <p *ngIf="order.status === 'Cancelled'" style="color: red;">{{order.status}}</p>
                     <p *ngIf="order.status === 'Active'" style="color: green;">{{order.status}}</p>
-                    <p *ngIf="order.status === 'InActive'" style="color: blue;">{{order.status}}</p>
+                    <!-- <p *ngIf="order.status === 'InActive'" style="color: blue;">{{order.status}}</p> -->
                   <ion-badge item-end (click)="viewSP(order.id_book_services,order.id_user)">DETAILS</ion-badge>
                 </ion-item>
                 </ion-col>
