@@ -8,6 +8,8 @@ import { ListPage } from '../pages/list/list';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { ViewPackagePage } from '../pages/view-package/view-package';
+
 
 // import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
 
@@ -17,7 +19,8 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  // rootPage: any = LoginPage;
+  rootPage: any = ViewPackagePage; 
 
   pages: Array<{ title: string, component: any }>;
 

@@ -34,6 +34,9 @@ import { AddAddressPage } from '../pages/add-address/add-address';
 import { EditAddressPage } from '../pages/edit-address/edit-address';
 
 // import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage/ngx';
+// import {MatDatepickerModule} from 'angular-material';
+
+// import { CalendarModule } from 'ion2-calendar';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,8 @@ import { EditAddressPage } from '../pages/edit-address/edit-address';
     HttpModule,
     ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
+    // CalendarModule
+    // MatDatepickerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -84,14 +89,14 @@ import { EditAddressPage } from '../pages/edit-address/edit-address';
     EditAddressPage,
     MyorderDetailsPage,
     OtpPage
-    
+
   ],
   providers: [
     StatusBar,
     SplashScreen,
     ReactiveFormsModule,
     FormsModule,
-    Geolocation, 
+    Geolocation,
     Network,
     Toast,
     // SecureStorage,
