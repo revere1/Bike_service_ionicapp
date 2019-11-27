@@ -32,7 +32,7 @@
       <ion-label>Royal Enfield</ion-label>
     </ion-item>
   </ion-card>
-
+  <!-- - 180CC -->
   <p text-center>On which day do you want the service?</p>
   <div class="row" style="margin-left: 1em">
     <button ion-button round (click)="daySelect(slot_days, day, 'day')" [ngClass]="{'selected-day': day.selected}"
@@ -115,6 +115,18 @@
       <ion-item>
         <ion-label>9AM-11AM</ion-label>
         <ion-radio value="9AM-11AM" disable="true"></ion-radio>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label>11AM-1PM</ion-label>
+        <ion-radio value="11AM-1PM" disable="true"></ion-radio>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label>1PM-3PM</ion-label>
+        <ion-radio value="1PM-3PM" disable="true"></ion-radio>
       </ion-item>
     </ion-col>
     <ion-col col-6>

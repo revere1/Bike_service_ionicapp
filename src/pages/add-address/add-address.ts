@@ -50,7 +50,7 @@ export class AddAddressPage {
       id_user:this.userId,
       status:"Active" 
     }
-    console.log("this is edit Profile: "+JSON.stringify(obj))
+    // console.log("this is edit Profile: "+JSON.stringify(obj))
     this.http.post(Global.url+'customeraddress/create',JSON.stringify(obj), options)
     .subscribe(data => {
       const data1 =  data.json()

@@ -221,13 +221,11 @@ export class ViewPackagePage {
     if (this.tday == 'Today') {
       alert('hi')
       b = new Date().toISOString().slice(0, 10);
-      console.log("This is date: " + b)
     }
     if (this.tmro == 'Tomorrow') {
       b = new Date();
       b = new Date(b.getTime() + (1000 * 60 * 60 * 24));
       b = b.toISOString().slice(0, 10);
-      console.log("This is date tomorrow1: " + a, b, c)
     }
 
     // if (this.t)

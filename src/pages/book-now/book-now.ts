@@ -31,11 +31,11 @@ Rupees: any;
       this.timeSlot = this.navParams.get('timeSlot');
       this.Rupees = this.navParams.get('cost');
       Global.Rupees = this.Rupees;
-      console.log("This is Rupess:", Global.Rupees)
+      // console.log("This is Rupess:", Global.Rupees)
   }
 
   openFilterModal(){
-    console.log('dayslot', this.daySlot)
+    // console.log('dayslot', this.daySlot)
     let openFilterModal = this.modalController.create(ReviewAddressPage, {serName: this.serviceName, dSlot:this.daySlot, tSlot: this.timeSlot, cost: this.Rupees});
     openFilterModal.present();
 

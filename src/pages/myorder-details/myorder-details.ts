@@ -57,7 +57,6 @@ export class MyorderDetailsPage {
     this.http.patch(getApiUrl, options).subscribe(
       getData =>{
         var cancelOrderDetails = getData.json();
-        console.log('orderuser result: ',JSON.stringify(cancelOrderDetails));
         if(cancelOrderDetails.status === 200){
         const toast = this.toast.create({
           message: cancelOrderDetails.Message,

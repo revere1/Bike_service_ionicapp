@@ -36,8 +36,6 @@ export class ManageAddressPage {
     this.http.get(`${Global.url}customeraddress/`+Global.userId).subscribe(
       getData =>{
         this.manageAddress = getData.json().response;
-        console.log('stat',this.manageAddress.status)
-        console.log("this is Data for Manage Address: "+JSON.stringify(this.manageAddress))
       })
   }
   viewAA(){
@@ -53,7 +51,6 @@ export class ManageAddressPage {
     this.http.delete(`${Global.url}customeraddress/`+addressId).subscribe(
       getData =>{
         //this.manageAddress = getData.json().response;
-        console.log('stat',this.manageAddress)       
         const data1 =  getData.json()
         if (data1.status === 201) {
           const toast = this.toast.create({
@@ -82,7 +79,6 @@ export class ManageAddressPage {
     this.http.patch(`${Global.url}customeraddress/addressStatus/`+id_user+"/"+id_user_address, options).subscribe(
       getData =>{
         this.manageAddress = getData.json().response;
-        console.log('stat',this.manageAddress)       
         const data1 =  getData.json()
         if (data1.status === 200) {
           const toast = this.toast.create({

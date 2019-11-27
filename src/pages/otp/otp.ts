@@ -51,9 +51,9 @@ export class OtpPage {
           toast.present();
           Global.userId = result.payLoad.id_user;
           if(!result.payLoad.full_name){
-            console.log("This is Resulrr: "+result.full_name)
           this.navCtrl.setRoot(EditProfilePage);
         } else {
+          localStorage.setItem('id_user', Global.userId);
           this.navCtrl.setRoot(TabsPage, {userId: result.payLoad.id_user})
         }
         } else {
