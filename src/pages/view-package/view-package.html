@@ -39,7 +39,7 @@
       [disabled]="day.disable" color="white" class="btnsize" *ngFor="let day of slot_days">
       {{day.label}}
       <ion-datetime *ngIf="day.calander" (ionChange)="dateChange($event)" displayFormat="DD/MM/YYYY"
-        [min]="moment().add(2, 'days').format('YYYY-MM-DD')" [max]="moment().add(2, 'month').format('YYYY-MM-DD')">
+        [min]="moment().add(2, 'days').format('YYYY-MM-DD')" [max]="moment().add(2, 'month').format('YYYY-MM-DD')" (click)="future('Future')">
       </ion-datetime>
 
       <!-- <ion-calendar *ngIf="day.calander" [(ngModel)]="date"

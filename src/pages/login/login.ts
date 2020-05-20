@@ -32,7 +32,7 @@ export class LoginPage {
     // private secureStorage: SecureStorage
   ) {
     this.signInForm = this.formBuilder.group({   
-      mobile_number: ['', [Validators.required,Validators.minLength(10), Validators.maxLength(12)]],
+      mobile_number: ['91', [Validators.required,Validators.minLength(10), Validators.maxLength(12)]],
     });
   }
   signIn() {

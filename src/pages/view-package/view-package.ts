@@ -194,6 +194,7 @@ export class ViewPackagePage {
     this.tday = td;
   }
   tMro(td) {
+    alert(this.tmro)
     this.first = false;
     this.sec = false;
     this.third = false;
@@ -281,8 +282,11 @@ export class ViewPackagePage {
   }
 
   dateChange(date) {
-    console.log(date);
+   
+    alert(JSON.stringify(date));
     this.calander_day = date;
+    this.enableTimes(this.slots, date);
+    
   }
 
 
